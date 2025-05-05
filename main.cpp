@@ -8,7 +8,7 @@ Engine engine;
 
 int main()
 {
-    InitWindow(500, 700, "Raylib");
+    InitWindow(590, 650, "Raylib");
     SetTargetFPS(60);
 
     InitAudioDevice();

@@ -48,7 +48,7 @@ public:
     virtual int Clicked();
 
     //Collision Gestion
-    void Collided();
+    virtual void Collided();
 
     static void CreateGameObject(const string id, GameObject* gO);
 
