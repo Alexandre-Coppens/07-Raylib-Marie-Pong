@@ -1,22 +1,28 @@
-#include "raylib.h"
 #include <iostream>
+#include <string>
+#include "Engine.h"
+#include "AssetsList.h"
 
-using namespace std;
+using std::string;
+Engine engine;
 
-int main() {
-
-    
-    cout << "Hello World" << endl;
-
-    InitWindow(300, 300, "My first Raylib window!");
+int main()
+{
+    InitWindow(500, 700, "Raylib");
     SetTargetFPS(60);
 
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        ClearBackground(DARKGREEN);
-        EndDrawing();
-    }
+    InitAudioDevice();
 
+	engine.Start();
+
+	srand(time(NULL));
+    while (!WindowShouldClose()){
+        UpdateMusicStream(AssetList::music);
+		engine.Update();
+		engine.Draw();
+	}
+
+    UnloadMusicStream(AssetList::music);
+    CloseAudioDevice();
     CloseWindow();
-    return 0;
 }
