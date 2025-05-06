@@ -10,9 +10,12 @@ Ball::Ball(Vector2 _pos, Vector2 _size, Color _color){
 	size = _size;
 	color = _color;
 	direction = RAYMATH_H::Vector2Normalize(Vector2{ float((rand()-0.5)*2),float((rand() - 0.5) * 2) });
+	direction.x = Clamp(direction.x, -0.33f, 0.33f);
+	direction = Vector2Normalize(direction);
 }
 
 Ball::~Ball(){
+	GameObjectList.erase(name);
 }
 
 void Ball::Update() {
@@ -20,7 +23,9 @@ void Ball::Update() {
 	float deltaSpeed = speed * GetFrameTime();
 	if (position.x + size.x > GetScreenWidth() || position.x < 0) direction.x *= -1;
 	if (position.y < 0) direction.y *= -1;
-	if (position.y + size.y > GetScreenHeight()) position = Vector2{ GetScreenWidth() * 0.5f, GetScreenHeight() * 0.5f };
+	if (position.y + size.y > GetScreenHeight()) {
+		delete this;
+		};
 
 	for (auto go : GameObjectList) {
 		if (go.second != this && go.second->enabled) {
@@ -29,9 +34,15 @@ void Ball::Update() {
 				position.y < go.second->position.y + go.second->size.y &&
 				position.y + size.y > go.second->position.y) 
 			{
+				soundPitch += 1.0f;
+				SetSoundPitch(AssetList::soundList["Hit"], soundPitch);
 				if (dynamic_cast<Paddle*>(go.second)) {
 					direction.x += (((position.x + (size.x * 0.5f)) - go.second->position.x) / go.second->size.x - 0.5f) * 2;
 					direction = Vector2Normalize(direction);
+					direction.x = Clamp(direction.x, -0.33f, 0.33f);
+					direction = Vector2Normalize(direction);
+					soundPitch = 1;
+					SetSoundPitch(AssetList::soundList["Hit"], soundPitch);
 				}
 				float xstart = std::max(position.x, go.second->position.x);
 				float xend = std::min(position.x + size.x, go.second->position.x + go.second->size.x);
@@ -47,6 +58,7 @@ void Ball::Update() {
 				}
 				speed += 400;
 				go.second->Collided();
+				PlaySound(AssetList::soundList["Hit"]);
 			}
 		}
 	}

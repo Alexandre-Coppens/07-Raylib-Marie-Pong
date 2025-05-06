@@ -15,6 +15,7 @@ private:
 
 public:
     static Music music;
+    static map<string, Sound> soundList;
     static map<string, Font> textFont;
     static map<string, Texture2D> SpriteList;
     static AssetList* instance;

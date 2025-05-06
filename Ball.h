@@ -10,6 +10,7 @@ class Ball : public GameObject {
 private:
     float speed{ 400 };
     Vector2 direction{ 0,0 };
+    float soundPitch{ 1 };
 
 protected:
 public:

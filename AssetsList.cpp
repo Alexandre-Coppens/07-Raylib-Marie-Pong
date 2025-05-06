@@ -5,6 +5,7 @@ Music AssetList::music;
 AssetList* AssetList::instance = nullptr;
 map<string, Font> AssetList::textFont;
 map<string, Texture2D> AssetList:: SpriteList;
+map<string, Sound> AssetList:: soundList;
 
 AssetList::AssetList() {
     if (SpriteList.size() > 0) return;
@@ -18,7 +19,9 @@ AssetList::AssetList() {
     textFont["Pixelplay"] = LoadFont("resources/fonts/pixelplay.png");
     textFont["Romulus"] = LoadFont("resources/fonts/romulus.png");
     textFont["Setback"] = LoadFont("resources/fonts/setback.png");
+
     music = LoadMusicStream("resources/Balatro.mp3");
+    soundList["Hit"] = LoadSound("resources/HitSound.wav");
 
     SetMusicVolume(music, 2);
     PlayMusicStream(music);
