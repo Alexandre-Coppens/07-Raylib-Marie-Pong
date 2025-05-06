@@ -6,6 +6,7 @@ Ball::Ball(){
 
 Ball::Ball(Vector2 _pos, Vector2 _size, Color _color){
 	enabled = true;
+	hasCollision = false;
 	position = _pos;
 	size = _size;
 	color = _color;

@@ -8,7 +8,7 @@ using std::map;
 
 class Bonus : public GameObject {
 private:
-    float speed{ 400 };
+    float speed{ 275 };
 
 protected:
 public:

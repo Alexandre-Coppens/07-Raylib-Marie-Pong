@@ -31,8 +31,10 @@ void Engine::Update() {
 		}
 	}
 	if (ballNbr == 0) {
-		GameObject::CreateGameObject("Ball", new Ball(Vector2{ GetScreenWidth() * 0.5f, GetScreenHeight() * 0.5f }, Vector2{ 20,20 }, RED));
-		lives--;
+		if (lives > 0) {
+			GameObject::CreateGameObject("Ball", new Ball(Vector2{ GetScreenWidth() * 0.5f, GetScreenHeight() * 0.5f }, Vector2{ 20,20 }, RED));
+			lives--;
+		}
 	}
 }
 
@@ -51,12 +53,12 @@ void Engine::SpawnBricks(){
 	for (int i = 0; i < brickSpawn.size(); i++) {
 		for (int j = 0; j < brickSpawn[i].size(); j++) {
 			if (brickSpawn[i][j] == 1) {
-				GameObject::CreateGameObject("Brick" + to_string(i) + ":" + to_string(j), new Brick(Vector2{ 2.0f + (j * 42), 75.0f + (i * 17) }, Vector2{ 40,15 }, BLUE));
+				GameObject::CreateGameObject("Brick" + to_string(i) + ":" + to_string(j), new Brick(Vector2{ 6.0f + (j * 58), 75.0f + (i * 22) }, Vector2{ 56,20 }, BLUE));
 			}
 		}
 	}
 	vector<GameObject*> brickList= GameObject::GetAllGameObjectsWith(GameObjectType::Brick);
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 10; i++) {
 		brickList[rand() % brickList.size() - 1]->color = GREEN;
 	}
 }

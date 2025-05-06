@@ -1,6 +1,8 @@
 #include "Brick.h"
 #include "Bonus.h"
 
+using std::to_string;
+
 Brick::Brick(){
 }
 
@@ -27,7 +29,7 @@ void Brick::Update(){
 void Brick::Collided(){
 	enabled = false;
 	if (color.r+color.g+color.b == GREEN.r+ GREEN.g+ GREEN.b) {
-		GameObject::CreateGameObject("Bonus", new Bonus(position, size, WHITE));
+		GameObject::CreateGameObject("Bonus" + to_string(std::rand()), new Bonus(position, size, WHITE));
 	}
 }
 

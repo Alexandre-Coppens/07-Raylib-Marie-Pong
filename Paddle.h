@@ -8,7 +8,7 @@ using std::map;
 
 class Paddle : public GameObject {
 private:
-    float speed{ 400 };
+    float speed{ 600 };
 
 protected:
 public:
