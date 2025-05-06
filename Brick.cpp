@@ -1,4 +1,5 @@
 #include "Brick.h"
+#include "Bonus.h"
 
 Brick::Brick(){
 }
@@ -10,6 +11,7 @@ Brick::Brick(Vector2 _pos, Vector2 _size, Color _color){
 	color = _color;
 	CreateRect();
 	sprite = &AssetList::SpriteList[""];
+	type = GameObjectType::Brick;
 }
 
 Brick::~Brick(){
@@ -24,5 +26,8 @@ void Brick::Update(){
 
 void Brick::Collided(){
 	enabled = false;
+	if (color.r+color.g+color.b == GREEN.r+ GREEN.g+ GREEN.b) {
+		GameObject::CreateGameObject("Bonus", new Bonus(position, size, WHITE));
+	}
 }
 

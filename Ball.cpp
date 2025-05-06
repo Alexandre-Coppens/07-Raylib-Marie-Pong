@@ -12,10 +12,10 @@ Ball::Ball(Vector2 _pos, Vector2 _size, Color _color){
 	direction = RAYMATH_H::Vector2Normalize(Vector2{ float((rand()-0.5)*2),float((rand() - 0.5) * 2) });
 	direction.x = Clamp(direction.x, -0.33f, 0.33f);
 	direction = Vector2Normalize(direction);
+	type = GameObjectType::Ball;
 }
 
 Ball::~Ball(){
-	GameObjectList.erase(name);
 }
 
 void Ball::Update() {
@@ -24,11 +24,11 @@ void Ball::Update() {
 	if (position.x + size.x > GetScreenWidth() || position.x < 0) direction.x *= -1;
 	if (position.y < 0) direction.y *= -1;
 	if (position.y + size.y > GetScreenHeight()) {
-		delete this;
+		needToDestroy = true;
 		};
 
 	for (auto go : GameObjectList) {
-		if (go.second != this && go.second->enabled) {
+		if (go.second != this && go.second->enabled && go.second->hasCollision) {
 			if (position.x < go.second->position.x + go.second->size.x &&
 				position.x + size.x > go.second->position.x &&
 				position.y < go.second->position.y + go.second->size.y &&

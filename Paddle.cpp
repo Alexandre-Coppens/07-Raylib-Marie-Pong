@@ -10,6 +10,7 @@ Paddle::Paddle(Vector2 _pos, Vector2 _size, Color _color){
 	color = _color;
 	CreateRect();
 	sprite = &AssetList::SpriteList[""];
+	type = GameObjectType::Paddle;
 }
 
 Paddle::~Paddle(){

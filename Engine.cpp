@@ -26,6 +26,9 @@ void Engine::Update() {
 	for (GameObject* go : goList) {
 		if (go->enabled) go->Update();
 		if (Ball* b = dynamic_cast<Ball*>(go)) ballNbr++;
+		if (go->needToDestroy) {
+			delete go;
+		}
 	}
 	if (ballNbr == 0) {
 		GameObject::CreateGameObject("Ball", new Ball(Vector2{ GetScreenWidth() * 0.5f, GetScreenHeight() * 0.5f }, Vector2{ 20,20 }, RED));
@@ -51,5 +54,9 @@ void Engine::SpawnBricks(){
 				GameObject::CreateGameObject("Brick" + to_string(i) + ":" + to_string(j), new Brick(Vector2{ 2.0f + (j * 42), 75.0f + (i * 17) }, Vector2{ 40,15 }, BLUE));
 			}
 		}
+	}
+	vector<GameObject*> brickList= GameObject::GetAllGameObjectsWith(GameObjectType::Brick);
+	for (int i = 0; i < 2; i++) {
+		brickList[rand() % brickList.size() - 1]->color = GREEN;
 	}
 }

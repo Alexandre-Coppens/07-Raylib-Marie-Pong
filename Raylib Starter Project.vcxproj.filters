@@ -36,6 +36,9 @@
     <ClCompile Include="Brick.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Bonus.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -54,6 +57,9 @@
       <Filter>Fichiers de ressources</Filter>
     </ClInclude>
     <ClInclude Include="Brick.h">
+      <Filter>Fichiers de ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="Bonus.h">
       <Filter>Fichiers de ressources</Filter>
     </ClInclude>
   </ItemGroup>

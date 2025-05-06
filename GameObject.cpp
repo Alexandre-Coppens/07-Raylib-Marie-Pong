@@ -18,7 +18,7 @@ GameObject::GameObject(bool _enabled, string _name, Vector2 _pos, Vector2 _size,
 }
 
 GameObject::~GameObject(){
-
+	GameObjectList.erase(name);
 }
 
 void GameObject::Update() {
