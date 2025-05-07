@@ -10,3 +10,6 @@ The more bricks you break without touching the paddle, the more the multiplier i
 Controls:
 -Left Arrow / Right Arrow : Move paddle
 -R to restart
+
+
+THERE IS NO SAVE, THE HIGHSCORE IS DELETED AT THE END OF THE GAME.
