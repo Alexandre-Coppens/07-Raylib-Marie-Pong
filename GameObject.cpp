@@ -76,6 +76,10 @@ vector<GameObject*> GameObject::GetAllGameObjectsWith(GameObjectType type){
     return ret;
 }
 
+void GameObject::DestroyGameObjectList(){
+	GameObjectList.clear();
+}
+
 int GameObject::Clicked() {
 	return 0;
 }

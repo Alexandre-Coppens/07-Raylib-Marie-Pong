@@ -14,6 +14,7 @@ private:
 
 protected:
 public:
+    int score{ 0 };
 
 private:
 public:

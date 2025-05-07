@@ -16,6 +16,8 @@ Engine::Engine() {
 void Engine::Start(){
 	assets = AssetList::GetInstance();
 	lives = 3;
+	score = 0;
+	end = false;
 	GameObject::CreateGameObject("Ball", new Ball(Vector2{ GetScreenWidth()*0.5f, GetScreenHeight()*0.5f}, Vector2{20,20}, RED));
 	GameObject::CreateGameObject("Paddle", new Paddle(Vector2{ (GetScreenWidth()*0.5f) - 5, 625}, Vector2{80,20}, BLUE));
 	SpawnBricks();
@@ -27,7 +29,11 @@ void Engine::Update() {
 	short bricks = 0;
 	for (GameObject* go : goList) {
 		if (go->enabled) go->Update();
-		if (Ball* b = dynamic_cast<Ball*>(go)) ballNbr++;
+		if (Ball* b = dynamic_cast<Ball*>(go)) {
+			ballNbr++;
+			score += b->score;
+			b->score = 0;
+		}
 		if (Bonus* bo = dynamic_cast<Bonus*>(go)) ballNbr++;
 		if (Brick* br = dynamic_cast<Brick*>(go)) bricks++;
 		if (go->needToDestroy) {
@@ -38,6 +44,10 @@ void Engine::Update() {
 		if (lives > 0) {
 			GameObject::CreateGameObject("Ball", new Ball(Vector2{ GetScreenWidth() * 0.5f, GetScreenHeight() * 0.5f }, Vector2{ 20,20 }, RED));
 			lives--;
+		}
+		else if (end == false){
+			end = true;
+			if (score > highscore) highscore = score;
 		}
 	}
 	if (bricks == 0) {
@@ -51,6 +61,11 @@ void Engine::Update() {
 		GameObject::CreateGameObject("Ball", new Ball(Vector2{ GetScreenWidth() * 0.5f, GetScreenHeight() * 0.5f }, Vector2{ 20,20 }, RED));
 		SpawnBricks();
 	}
+
+	if (IsKeyDown(KEY_R)) {
+		GameObject::DestroyGameObjectList();
+		Start();
+	}
 }
 
 void Engine::Draw() {
@@ -61,7 +76,16 @@ void Engine::Draw() {
 		if (go->enabled) go->Draw();
 	}
 	DrawTextEx(AssetList::textFont["Setback"], ("Lives " + to_string(lives)).c_str(), Vector2{10,0}, 20, 5, DARKGRAY);
+	if (score >= highscore) 	DrawTextEx(AssetList::textFont["Setback"], (to_string(score)).c_str(), Vector2{ 300,0 }, 20, 5, ORANGE);
+	else DrawTextEx(AssetList::textFont["Setback"], (to_string(score)).c_str(), Vector2{ 300,0 }, 20, 5, DARKGRAY);
 	EndDrawing();
+
+	if (end) {
+		if (score >= highscore) 	DrawTextEx(AssetList::textFont["Setback"], ("Score " + to_string(score)).c_str(), Vector2{ 150,250 }, 20, 5, ORANGE);
+		else DrawTextEx(AssetList::textFont["Setback"], ("Score " + to_string(score)).c_str(), Vector2{ 150,250 }, 20, 5, DARKGRAY);
+		DrawTextEx(AssetList::textFont["Setback"], ("HighScore " + to_string(highscore)).c_str(), Vector2{ 150,280 }, 20, 5, DARKGRAY);
+		DrawTextEx(AssetList::textFont["Setback"], "Press R to restart", Vector2{ 150,310 }, 20, 5, RED);
+	}
 }
 
 void Engine::SpawnBricks(){
@@ -74,6 +98,6 @@ void Engine::SpawnBricks(){
 	}
 	vector<GameObject*> brickList= GameObject::GetAllGameObjectsWith(GameObjectType::Brick);
 	for (int i = 0; i < 10; i++) {
-		brickList[rand() % brickList.size() - 1]->color = GREEN;
+		brickList[rand() % brickList.size()]->color = GREEN;
 	}
 }

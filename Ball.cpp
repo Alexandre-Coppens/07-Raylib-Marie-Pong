@@ -21,7 +21,7 @@ void Ball::Update() {
 	speed = Lerp(speed, 400, 5 * GetFrameTime());
 	float deltaSpeed = speed * GetFrameTime();
 	if (position.x + size.x > GetScreenWidth() || position.x < 0) direction.x *= -1;
-	if (position.y < 0) direction.y *= -1;
+	if (position.y < 0) { direction.y *= -1; position.y = 0; }
 	if (position.y + size.y > GetScreenHeight()) {
 		Destroy();
 		};
@@ -42,6 +42,9 @@ void Ball::Update() {
 					direction = Vector2Normalize(direction);
 					soundPitch = 1;
 					SetSoundPitch(AssetList::soundList["Hit"], soundPitch);
+				}
+				else{
+					score += 100 * soundPitch;
 				}
 				float xstart = std::max(position.x, go.second->position.x);
 				float xend = std::min(position.x + size.x, go.second->position.x + go.second->size.x);

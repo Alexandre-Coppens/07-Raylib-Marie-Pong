@@ -62,4 +62,5 @@ public:
     static vector<GameObject*> GetAllGameObjects();
     static vector<GameObject*> GetAllGameObjectsWith(GameObjectType type);
     
+    static void DestroyGameObjectList();
 };

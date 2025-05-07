@@ -18,6 +18,9 @@ private:
         {1,1,1,1,1,1,1,1,1,1},
     };
     int lives{};
+    int score{ 0 };
+    int highscore{ 15000 };
+    bool end{ false };
 
 private:
     void SpawnBricks();
