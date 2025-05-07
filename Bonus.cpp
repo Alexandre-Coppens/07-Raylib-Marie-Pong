@@ -26,6 +26,7 @@ void Bonus::Draw(){
 
 void Bonus::Update(){
 	position.y += speed * GetFrameTime();
+	if (position.y > GetScreenHeight()) Destroy();
 	for (auto go : GameObjectList) {
 		if (go.second != this && go.second->enabled && go.second->hasCollision) {
 			if (position.x < go.second->position.x + go.second->size.x &&
@@ -34,8 +35,8 @@ void Bonus::Update(){
 				position.y + size.y > go.second->position.y)
 			{
 				if (dynamic_cast<Paddle*>(go.second)) {
-					GameObject::CreateGameObject("Ball" + to_string(std::rand()), new Ball(Vector2{ go.second->position.x , go.second->position.y - 20 }, Vector2{ 20,20 }, RED));
-					needToDestroy = true;
+					GameObject::CreateGameObject("Ball" + to_string(std::rand()), new Ball(Vector2{ go.second->position.x , go.second->position.y - 25 }, Vector2{ 20,20 }, RED));
+					Destroy();
 				}
 			}
 		}

@@ -27,7 +27,7 @@ void Brick::Update(){
 }
 
 void Brick::Collided(){
-	enabled = false;
+	Destroy();
 	if (color.r+color.g+color.b == GREEN.r+ GREEN.g+ GREEN.b) {
 		GameObject::CreateGameObject("Bonus" + to_string(std::rand()), new Bonus(position, size, WHITE));
 	}

@@ -79,3 +79,7 @@ vector<GameObject*> GameObject::GetAllGameObjectsWith(GameObjectType type){
 int GameObject::Clicked() {
 	return 0;
 }
+
+void GameObject::Destroy() {
+	needToDestroy = true;
+}

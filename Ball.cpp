@@ -10,9 +10,7 @@ Ball::Ball(Vector2 _pos, Vector2 _size, Color _color){
 	position = _pos;
 	size = _size;
 	color = _color;
-	direction = RAYMATH_H::Vector2Normalize(Vector2{ float((rand()-0.5)*2),float((rand() - 0.5) * 2) });
-	direction.x = Clamp(direction.x, -0.33f, 0.33f);
-	direction = Vector2Normalize(direction);
+	direction = Vector2{ 0, 1 };
 	type = GameObjectType::Ball;
 }
 
@@ -25,7 +23,7 @@ void Ball::Update() {
 	if (position.x + size.x > GetScreenWidth() || position.x < 0) direction.x *= -1;
 	if (position.y < 0) direction.y *= -1;
 	if (position.y + size.y > GetScreenHeight()) {
-		needToDestroy = true;
+		Destroy();
 		};
 
 	for (auto go : GameObjectList) {

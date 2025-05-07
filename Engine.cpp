@@ -3,6 +3,7 @@
 #include "Engine.h"
 
 #include "Ball.h"
+#include "Bonus.h"
 #include "Paddle.h"
 #include "Brick.h"
 
@@ -23,9 +24,12 @@ void Engine::Start(){
 void Engine::Update() {
 	vector<GameObject*> goList = GameObject::GetAllGameObjects();
 	short ballNbr = 0;
+	short bricks = 0;
 	for (GameObject* go : goList) {
 		if (go->enabled) go->Update();
 		if (Ball* b = dynamic_cast<Ball*>(go)) ballNbr++;
+		if (Bonus* bo = dynamic_cast<Bonus*>(go)) ballNbr++;
+		if (Brick* br = dynamic_cast<Brick*>(go)) bricks++;
 		if (go->needToDestroy) {
 			delete go;
 		}
@@ -36,6 +40,17 @@ void Engine::Update() {
 			lives--;
 		}
 	}
+	if (bricks == 0) {
+		if (brickSpawn.size() <= 14) {
+			brickSpawn.push_back(vector<bool>(10, true));
+			brickSpawn.push_back(vector<bool>(10, true));
+			brickSpawn.push_back(vector<bool>(10, true));
+		}
+		vector<GameObject*> balls = GameObject::GetAllGameObjectsWith(GameObjectType::Ball);
+		for (GameObject* b : balls) b->needToDestroy = true;
+		GameObject::CreateGameObject("Ball", new Ball(Vector2{ GetScreenWidth() * 0.5f, GetScreenHeight() * 0.5f }, Vector2{ 20,20 }, RED));
+		SpawnBricks();
+	}
 }
 
 void Engine::Draw() {
@@ -45,7 +60,7 @@ void Engine::Draw() {
 	for (GameObject* go : goList) {
 		if (go->enabled) go->Draw();
 	}
-	DrawTextEx(AssetList::textFont["Mecha"], ("Lives " + to_string(lives)).c_str(), Vector2{10,0}, 20, 5, GRAY);
+	DrawTextEx(AssetList::textFont["Setback"], ("Lives " + to_string(lives)).c_str(), Vector2{10,0}, 20, 5, DARKGRAY);
 	EndDrawing();
 }
 
