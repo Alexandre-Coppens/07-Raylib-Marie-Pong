@@ -1,3 +1,5 @@
+#include <iostream>
+#include <filesystem>
 #include "AssetsList.h"
 
 Texture2D AssetList::textureTemp;
@@ -9,19 +11,10 @@ map<string, Sound> AssetList:: soundList;
 
 AssetList::AssetList() {
     if (SpriteList.size() > 0) return;
-    LoadTexture2D("", "resources/Unknown.png");
 
-    textFont["Alagard"] = LoadFont("resources/fonts/alagard.png");
-    textFont["Alpha-Beta"] = LoadFont("resources/fonts/alpha_beta.png");
-    textFont["Jupiter-Crash"] = LoadFont("resources/fonts/jupiter_crash.png");
-    textFont["Mecha"] = LoadFont("resources/fonts/mecha.png");
-    textFont["Pixantiqua"] = LoadFont("resources/fonts/pixantiqua.png");
-    textFont["Pixelplay"] = LoadFont("resources/fonts/pixelplay.png");
-    textFont["Romulus"] = LoadFont("resources/fonts/romulus.png");
-    textFont["Setback"] = LoadFont("resources/fonts/setback.png");
+    LoadRessources();
 
     music = LoadMusicStream("resources/Balatro.mp3");
-    soundList["Hit"] = LoadSound("resources/HitSound.wav");
 
     SetMusicVolume(music, 2);
     PlayMusicStream(music);
@@ -30,7 +23,96 @@ AssetList::AssetList() {
 AssetList::~AssetList(){
 }
 
-void AssetList::LoadTexture2D(string name, string link){
+void AssetList::LoadRessources(){
+    string path = "resources";
+    const std::filesystem::path resourcePath{ path };
+
+    for (const auto& entry : std::filesystem::directory_iterator(resourcePath)) {
+
+        const auto filenameStr = entry.path().filename().string();
+
+        if (entry.is_directory()) {
+            std::cout << "dir:  " << filenameStr << '\n';
+            if (filenameStr == "fonts") LoadFontFolder(path + "/" + filenameStr);
+            if (filenameStr == "sounds") LoadSoundFolder(path + "/" + filenameStr);
+            if (filenameStr == "sprites") LoadSpriteFolder(path + "/" + filenameStr);
+        }
+        else if (entry.is_regular_file()) {
+            std::cout << "file: " << filenameStr << '\n';
+        }
+    }
+}
+
+void AssetList::LoadFontFolder(string path) {
+    const std::filesystem::path resourcePath{ path };
+
+    for (const auto& entry : std::filesystem::directory_iterator(resourcePath)) {
+        if (!entry.is_regular_file()) {
+            std::cout << "??    " << entry.path().filename().string() << '\n';
+            continue;
+        }
+
+        const auto filenameStr = entry.path().filename().string();
+        const auto fileStemStr = entry.path().stem().string();
+        const auto fileExtensionStr = entry.path().extension().string();
+
+        std::cout << "      -file: " << filenameStr << '\n';
+        if (fileExtensionStr == ".png") {
+            AssetList::textFont[fileStemStr] = LoadFont((path + "/" + filenameStr).c_str());
+        }
+        else {
+            std::cout << "ResourceLoader: File skipped, other files than png are not supported.          " << '\n';
+        }
+    }
+}
+
+void AssetList::LoadSoundFolder(string path) {
+    const std::filesystem::path resourcePath{ path };
+
+    for (const auto& entry : std::filesystem::directory_iterator(resourcePath)) {
+        if (!entry.is_regular_file()) {
+            std::cout << "??    " << entry.path().filename().string() << '\n';
+            continue;
+        }
+
+        const auto filenameStr = entry.path().filename().string();
+        const auto fileStemStr = entry.path().stem().string();
+        const auto fileExtensionStr = entry.path().extension().string();
+
+        std::cout << "      -file: " << filenameStr << '\n';
+        if (fileExtensionStr == ".wav" || fileExtensionStr == ".mp3") {
+            AssetList::soundList[fileStemStr] = LoadSound((path + "/" + filenameStr).c_str());
+        }
+        else {
+            std::cout << "ResourceLoader: File skipped, other files than wav or mp3 are not supported.          " << '\n';
+        }
+    }
+}
+
+void AssetList::LoadSpriteFolder(string path) {
+    const std::filesystem::path resourcePath{ path };
+
+    for (const auto& entry : std::filesystem::directory_iterator(resourcePath)) {
+        if (!entry.is_regular_file()) {
+            std::cout << "??    " << entry.path().filename().string() << '\n';
+            continue;
+        }
+
+        const auto filenameStr = entry.path().filename().string();
+        const auto fileStemStr = entry.path().stem().string();
+        const auto fileExtensionStr = entry.path().extension().string();
+
+        std::cout << "      -file: " << filenameStr << '\n';
+        if (fileExtensionStr == ".png") {
+            LoadTexture2D(fileStemStr, path + "/" + filenameStr);
+        }
+        else {
+            std::cout << "ResourceLoader: File skipped, other files than png are not supported.          " << '\n';
+        }
+    }
+}
+
+void AssetList::LoadTexture2D(string name, string link) {
     Image temp = LoadImage(link.c_str());
     textureTemp = LoadTextureFromImage(temp);
     SpriteList[name] = textureTemp;
@@ -43,3 +125,5 @@ AssetList* AssetList::GetInstance() {
     }
     return instance;
 }
+
+

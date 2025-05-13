@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "GameObject.h"
 
+
 using std::cout;
 using std::to_string;
 
@@ -11,6 +12,7 @@ Engine::Engine() {
 
 void Engine::Start(){
 	assets = AssetList::GetInstance();
+	GameObject::CreateGameObject("Ball", new Ball(Vector2{ GetScreenWidth() * 0.5f, GetScreenHeight() * 0.5f }, Vector2{ 50,50 }, RED));
 }
 
 void Engine::Update() {

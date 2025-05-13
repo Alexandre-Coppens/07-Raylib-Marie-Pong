@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
 #include "Engine.h"
-#include "AssetsList.h"
-//#include "RessourceLoader.h"
 
 using std::string;
 Engine engine;

@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include "Raylib.h"
+#include "Raylib.h"
 
 using std::string;
 using std::vector;
@@ -23,6 +24,12 @@ public:
 private:
     AssetList();
     ~AssetList();
+    void LoadRessources();
+
+    void LoadFontFolder(string path);
+    void LoadSoundFolder(string path);
+    void LoadSpriteFolder(string path);
+
     void LoadTexture2D(string name, string link);
 
 public:
