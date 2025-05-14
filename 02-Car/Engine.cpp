@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include "Engine.h"
-#include "GameObject.h"
+#include "Car.h"
 
 
 using std::cout;
@@ -12,7 +12,7 @@ Engine::Engine() {
 
 void Engine::Start(){
 	assets = AssetList::GetInstance();
-	GameObject::CreateGameObject("Ball", new Ball(Vector2{ GetScreenWidth() * 0.5f, GetScreenHeight() * 0.5f }, Vector2{ 50,50 }, RED));
+	GameObject::CreateGameObject("Car", new Car(Vector2{ GetScreenWidth() * 0.5f, GetScreenHeight() * 0.5f }, Vector2{ 50,50 }, RED));
 }
 
 void Engine::Update() {

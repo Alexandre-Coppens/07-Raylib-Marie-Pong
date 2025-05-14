@@ -12,9 +12,9 @@ using std::vector;
 using std::map;
 
 enum class GameObjectType {
-    Paddle,
-    Ball,
-    Brick,
+    Car,
+    Wall,
+    Background,
     None
 };
 
@@ -24,7 +24,7 @@ protected:
     static map<string, GameObject*> GameObjectList;
     Rectangle rect;
 public:
-    bool enabled{ false };
+    bool enabled{ true };
     bool hasCollision{ true };
     bool needToDestroy{ false };
 

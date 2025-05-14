@@ -4,7 +4,6 @@
 #include <vector>
 #include <map>
 #include "Raylib.h"
-#include "Raylib.h"
 
 using std::string;
 using std::vector;

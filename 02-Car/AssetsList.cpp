@@ -11,13 +11,7 @@ map<string, Sound> AssetList:: soundList;
 
 AssetList::AssetList() {
     if (SpriteList.size() > 0) return;
-
     LoadRessources();
-
-    music = LoadMusicStream("resources/Balatro.mp3");
-
-    SetMusicVolume(music, 2);
-    PlayMusicStream(music);
 }
 
 AssetList::~AssetList(){
