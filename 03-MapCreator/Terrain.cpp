@@ -4,6 +4,7 @@ map<int, string> Terrain::dictionary;
 vector<vector<Terrain::Tile>> Terrain::terrain;
 Vector2 Terrain::tileSize{ 50,50 };
 Vector2 Terrain::position{ 0,0 };
+short Terrain::maxLayer{ 5 };
 
 Terrain::Terrain() {
 }
@@ -15,19 +16,39 @@ void Terrain::Update()
 {
 }
 
-void Terrain::AddNewTile(Vector2 pos, string name){
-	if (terrain.empty()) terrain.push_back(vector<Tile>());
-	for (auto d : dictionary) {
-		if (name == d.second) {
-			terrain[0].push_back(Tile{ pos, 0, 0, d.first });
-			return;
-		}
+void Terrain::AddNewTile(int layer,  Vector2 pos, string name) {
+	int index = CheckInDictionary(name);
+
+	if (terrain.size() < maxLayer) {
+		terrain.resize(maxLayer);
 	}
 
-	int newInt = (int)dictionary.size();
-	terrain[0].push_back(Tile{ pos, 0, 0, newInt});
-	dictionary[newInt] = name;
+	if (terrain[layer].size() == 0) {
+		terrain[layer].push_back(Tile{ pos, (short)layer, 0, index });
+		return;
+	}
+
+	for (auto it = terrain[layer].begin(); it != terrain[layer].end();) {
+		if (Vector2Equals(it->position, pos)) {
+			terrain[layer].erase(it);
+			break;
+		}
+		else it++;
+	}
+
+	terrain[layer].push_back(Tile{ pos, (short)layer, 0, index });
 }
 
 void Terrain::RemoveTile(){
+}
+
+int Terrain::CheckInDictionary(string name) {
+	for (auto d : dictionary) {
+		if (name == d.second) {
+			return d.first;
+		}
+	}
+	int newInt = (int)dictionary.size();
+	dictionary[newInt] = name;
+	return newInt;
 }

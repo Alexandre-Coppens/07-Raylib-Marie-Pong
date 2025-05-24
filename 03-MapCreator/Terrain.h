@@ -28,6 +28,7 @@ public:
     static vector<vector<Tile>> terrain;
     static Vector2 tileSize;
     static Vector2 position;
+    static short maxLayer;
 
 private:
 public:
@@ -36,6 +37,7 @@ public:
 
     void Update();
 
-    void AddNewTile(Vector2 pos, string name);
+    void AddNewTile(int layer, Vector2 pos, string name);
     void RemoveTile();
+    int CheckInDictionary(string n);
 };

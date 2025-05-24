@@ -17,19 +17,21 @@ static void DrawScreen(Vector2* scroll){
 
 	short max = fmax(terrain->size(), goList->size());
 	for (int i = 0; i < max; i++) {
-		if (!terrain->size() <= i) {
-			for (Terrain::Tile tile : (*terrain)[i]) {
-				Texture2D* sprite = &AssetList::SpriteList[Terrain::dictionary[tile.dictionaryTexture]];
-				DrawTexturePro(*sprite,
-					Rectangle{ 0, 0, (float)sprite->width, (float)sprite->height },
-					Rectangle{ scroll->x +(tile.position.x *Terrain::tileSize.x), scroll->y + (tile.position.y * Terrain::tileSize.y), Terrain::tileSize.x, Terrain::tileSize.y },
-					Vector2{ 0,0 },
-					tile.rotation,
-					WHITE);
+		if (i < terrain->size()) {
+			if ((*terrain)[i].size() > 0) {
+				for (Terrain::Tile tile : (*terrain)[i]) {
+					Texture2D* sprite = &AssetList::SpriteList[Terrain::dictionary[tile.dictionaryTexture]];
+					DrawTexturePro(*sprite,
+						Rectangle{ 0, 0, (float)sprite->width, (float)sprite->height },
+						Rectangle{ scroll->x + (tile.position.x * Terrain::tileSize.x), scroll->y + (tile.position.y * Terrain::tileSize.y), Terrain::tileSize.x, Terrain::tileSize.y },
+						Vector2{ 0,0 },
+						tile.rotation,
+						WHITE);
+				}
 			}
 		}
 
-		if (!goList->size() <= i) {
+		if (goList->size() > i) {
 			for (GameObject* go : (*goList)[i]) {
 				if (go->enabled) go->Draw(*scroll);
 			}
