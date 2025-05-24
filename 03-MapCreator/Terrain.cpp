@@ -16,7 +16,7 @@ void Terrain::Update()
 {
 }
 
-void Terrain::AddNewTile(int layer,  Vector2 pos, string name) {
+void Terrain::AddNewTile(int layer,  int rotation, Vector2 pos, string name) {
 	int index = CheckInDictionary(name);
 
 	if (terrain.size() < maxLayer) {
@@ -24,7 +24,7 @@ void Terrain::AddNewTile(int layer,  Vector2 pos, string name) {
 	}
 
 	if (terrain[layer].size() == 0) {
-		terrain[layer].push_back(Tile{ pos, (short)layer, 0, index });
+		terrain[layer].push_back(Tile{ pos, (short)layer, rotation, index });
 		return;
 	}
 
@@ -36,7 +36,7 @@ void Terrain::AddNewTile(int layer,  Vector2 pos, string name) {
 		else it++;
 	}
 
-	terrain[layer].push_back(Tile{ pos, (short)layer, 0, index });
+	terrain[layer].push_back(Tile{ pos, (short)layer, rotation, index });
 }
 
 void Terrain::RemoveTile(){

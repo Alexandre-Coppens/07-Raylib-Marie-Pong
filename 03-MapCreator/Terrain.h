@@ -37,7 +37,7 @@ public:
 
     void Update();
 
-    void AddNewTile(int layer, Vector2 pos, string name);
+    void AddNewTile(int layer, int rotation, Vector2 pos, string name);
     void RemoveTile();
     int CheckInDictionary(string n);
 };

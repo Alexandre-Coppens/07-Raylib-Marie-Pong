@@ -11,6 +11,7 @@ using std::to_string;
 Terrain terrain;
 int currentTexture{ 0 };
 int layer{ 0 };
+int rotation{ 0 };
 
 Engine::Engine() {
 }
@@ -44,9 +45,17 @@ void Engine::Update() {
 		if (layer == 0) layer = terrain.maxLayer-1;
 		else layer--;
 	}
+	if (IsKeyPressed(KEY_Q)) {
+		if (rotation == 0) rotation = 270;
+		else rotation -= 90;
+	}
+	if (IsKeyPressed(KEY_E)) {
+		if (rotation == 270) rotation = 0;
+		else rotation += 90;
+	}
 
 	Vector2 mPos{ (int)floor((-scroll.x + GetMouseX()) / terrain.tileSize.x), (int)floor((-scroll.y + GetMouseY()) / terrain.tileSize.y) };
-	if(IsMouseButtonPressed(0)) terrain.AddNewTile(layer, mPos, AssetList::GetNameAtPosition(currentTexture));
+	if(IsMouseButtonPressed(0)) terrain.AddNewTile(layer, rotation, mPos, AssetList::GetNameAtPosition(currentTexture));
 
 	if (GetMouseWheelMove()>0) {
 		if (currentTexture == 0)currentTexture = AssetList::SpriteList.size() - 1;
@@ -68,13 +77,14 @@ void Engine::Draw() {
 	DrawText(("Y. " + to_string((scroll.y - GetMouseY()) / terrain.tileSize.y)).c_str(), 10, 30, 20, GRAY);
 	DrawText(("Current Sprite:  " + AssetList::GetNameAtPosition(currentTexture)).c_str(), 10, 50, 20, ORANGE);
 	DrawText(("Current Layer:  " + to_string(layer)).c_str(), 10, 70, 20, ORANGE);
+	DrawText(("Current Rotation:  " + to_string(rotation)).c_str(), 10, 90, 20, ORANGE);
 
 	Texture2D* sprite = &AssetList::SpriteList[AssetList::GetNameAtPosition(currentTexture)];
 	DrawTexturePro(*sprite,
 		Rectangle{ 0, 0, (float)sprite->width, (float)sprite->height },
-		Rectangle{ 400, 10, 80, 80 },
-		Vector2{ 0,0 },
-		0,
+		Rectangle{ 500, 50, 80, 80 },
+		Vector2{ 40,40 },
+		rotation,
 		WHITE);
 	EndDrawing();
 }
