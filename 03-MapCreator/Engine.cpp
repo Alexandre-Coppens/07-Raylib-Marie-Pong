@@ -1,10 +1,3 @@
-/*TODO : 
-* -Save and Load Maps
-* -Create Circuit Tiles
-* -Make the circuit and put it on the car game
-*/
-
-
 #include <iostream>
 #include <algorithm>
 #include "Engine.h"

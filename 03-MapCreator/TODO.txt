@@ -1,5 +1,6 @@
-Automation of ressource loading with name
-Map making with layers and scrolling
+* -Save and Load Maps
+* -Create Circuit Tiles
+* -Make the circuit and put it on the car game
 
 Car physics
 Collisions
