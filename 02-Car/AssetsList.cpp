@@ -106,6 +106,15 @@ void AssetList::LoadSpriteFolder(string path) {
     }
 }
 
+string AssetList::GetNameAtPosition(int position) {
+    int i = 0;
+    for (auto s : SpriteList) {
+        if (i == position) return s.first;
+        i++;
+    }
+    return "Unknown";
+}
+
 void AssetList::LoadTexture2D(string name, string link) {
     Image temp = LoadImage(link.c_str());
     textureTemp = LoadTextureFromImage(temp);

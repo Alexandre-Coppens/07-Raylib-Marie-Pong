@@ -1,6 +1,7 @@
 #include "GameObject.h"
 
 map<string, GameObject*> GameObject::GameObjectList;
+vector<vector<GameObject*>> GameObject::GameObjectsByLayer;
 
 GameObject::GameObject(){
 	CreateRect();
@@ -24,8 +25,8 @@ GameObject::~GameObject(){
 void GameObject::Update() {
 }
 
-void GameObject::Draw() {
-	DrawTextureRec(*sprite, rect, position, WHITE);
+void GameObject::Draw(Vector2* scroll) {
+	DrawTextureRec(*sprite, rect, Vector2Add(position, *scroll), WHITE);
 }
 
 bool GameObject::IsCursorInBounds(){
@@ -43,9 +44,13 @@ void GameObject::CreateRect(){
 void GameObject::Collided(){
 }
 
-void GameObject::CreateGameObject(const string id, GameObject* gO){
+void GameObject::CreateGameObject(const string id, int layer,GameObject* gO){
 	gO->name = id;
 	GameObjectList[id] = gO;
+	if (GameObjectsByLayer.size() < layer+1) {
+		GameObjectsByLayer.resize(layer+1);
+	}
+	GameObjectsByLayer[layer].push_back(gO);
 }
 
 GameObject* GameObject::GetGameObjectWithName(string _name) {
@@ -64,6 +69,11 @@ vector<GameObject*> GameObject::GetAllGameObjects()
 		ret.push_back(const_cast<GameObject*>(i.second));
 	}
 	return ret;
+}
+
+vector<vector<GameObject*>>* GameObject::GetAllGameObjectsLayered()
+{
+	return &GameObjectsByLayer;
 }
 
 vector<GameObject*> GameObject::GetAllGameObjectsWith(GameObjectType type){

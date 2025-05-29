@@ -17,11 +17,11 @@ private:
     float speed{ 0 };
     Vector2 deltaSpeed{ 0,0 };
     float towardSpeed{ 0 };
-    Vector2 maxSpeed{ 100, -75 };
+    Vector2 maxSpeed{ 500, -300 };
     bool isAccelerating = false;
 
     float turnRate{ 1 };
-    float minTurnSpeed{ 0.5f };
+    float minTurnSpeed{ 50 };
     float rotation{ 0 };
 
     bool flipX{ false };
@@ -37,6 +37,6 @@ public:
     Car(Vector2 _pos, Vector2 _size, Color color);
     ~Car();
 
-    void Draw();
+    void Draw(Vector2* scroll);
     void Update();
 };

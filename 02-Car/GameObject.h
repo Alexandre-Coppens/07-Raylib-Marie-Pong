@@ -22,6 +22,7 @@ class GameObject {
 private:
 protected:
     static map<string, GameObject*> GameObjectList;
+    static vector<vector<GameObject*>> GameObjectsByLayer;
     Rectangle rect;
 public:
     bool enabled{ true };
@@ -31,6 +32,7 @@ public:
     string name{ "" };
     Vector2 position{ 0,0 };
     Vector2 size{ 0,0 };
+    short layer{ 0 };
     Texture2D* sprite{};
     Color color{WHITE};
     GameObjectType type{ GameObjectType::None};
@@ -45,7 +47,7 @@ public:
     virtual ~GameObject();
     
     virtual void Update();
-    virtual void Draw();
+    virtual void Draw(Vector2* scroll);
     //Put the object on the Destroy list for next Update
     void Destroy(); 
 
@@ -56,10 +58,11 @@ public:
     //Collision Gestion
     virtual void Collided();
 
-    static void CreateGameObject(const string id, GameObject* gO);
+    static void CreateGameObject(const string id, int layer, GameObject* gO);
 
     static GameObject* GetGameObjectWithName(string _name);
     static vector<GameObject*> GetAllGameObjects();
+    static vector<vector<GameObject*>>* GetAllGameObjectsLayered();
     static vector<GameObject*> GetAllGameObjectsWith(GameObjectType type);
     
     static void DestroyGameObjectList();

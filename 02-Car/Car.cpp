@@ -12,6 +12,7 @@ Car::Car(Vector2 _pos, Vector2 _size, Color _color){
 	color = _color;
 	type = GameObjectType::Car;
 	CreateRect();
+
 }
 
 Car::~Car(){
@@ -45,7 +46,7 @@ void Car::Update(){
 	position.y += deltaSpeed.y;
 }
 
-void Car::Draw() {
+void Car::Draw(Vector2* scroll) {
 	CarSide();
 	Vector2 posInSprite{ 
 		sprite->width * currentSprite.x * 0.33f , 
@@ -53,7 +54,7 @@ void Car::Draw() {
 	};
 
 	Rectangle source = { posInSprite.x, posInSprite.y, sprite->width * 0.33f * ((flipX || speed < 0) && !(!flipX && speed < 0) ? -1 : 1), sprite->height * 0.33f};
-	Rectangle dest = { position.x, position.y, size.x, size.y };
+	Rectangle dest = { position.x + scroll->x, position.y + scroll->y, size.x, size.y };
 	DrawTexturePro(*sprite, source, dest, Vector2Zero(), 0, color);
 	DrawText(to_string(speed).c_str(), 10, 10, 20, GRAY);
 }

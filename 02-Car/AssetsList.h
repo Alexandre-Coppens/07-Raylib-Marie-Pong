@@ -32,5 +32,6 @@ private:
     void LoadTexture2D(string name, string link);
 
 public:
+    static string GetNameAtPosition(int position);
     static AssetList* GetInstance();
 };
