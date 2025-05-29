@@ -32,36 +32,45 @@ void Engine::Update() {
 		}
 	}
 
+	//Move
 	if (IsKeyDown(KEY_W)) scroll.y += scrollSpeed.y * GetFrameTime();
 	if (IsKeyDown(KEY_S)) scroll.y -= scrollSpeed.y * GetFrameTime();
 	if (IsKeyDown(KEY_A)) scroll.x += scrollSpeed.x * GetFrameTime();
 	if (IsKeyDown(KEY_D)) scroll.x -= scrollSpeed.x * GetFrameTime();
 
-	if (IsKeyPressed(KEY_UP)) {
+	scroll.x -= GetGamepadAxisMovement(0, GAMEPAD_AXIS_RIGHT_X) * scrollSpeed.x * GetFrameTime();
+	scroll.y -= GetGamepadAxisMovement(0, GAMEPAD_AXIS_RIGHT_Y) * scrollSpeed.y * GetFrameTime();
+
+	//Rotation + Layer change
+	if (IsKeyPressed(KEY_UP) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_LEFT_FACE_UP)) {
 		if (layer == terrain.maxLayer-1) layer = 0;
 		else layer++;
 	}
-	if (IsKeyPressed(KEY_DOWN)){
+	if (IsKeyPressed(KEY_DOWN) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_LEFT_FACE_DOWN)){
 		if (layer == 0) layer = terrain.maxLayer-1;
 		else layer--;
 	}
-	if (IsKeyPressed(KEY_Q)) {
+	if (IsKeyPressed(KEY_Q)||IsGamepadButtonPressed(0, GAMEPAD_BUTTON_LEFT_FACE_LEFT)) {
 		if (rotation == 0) rotation = 270;
 		else rotation -= 90;
 	}
-	if (IsKeyPressed(KEY_E)) {
+	if (IsKeyPressed(KEY_E) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT)) {
 		if (rotation == 270) rotation = 0;
 		else rotation += 90;
 	}
 
+	//Tiles placement
 	Vector2 mPos{ (int)floor((-scroll.x + GetMouseX()) / terrain.tileSize.x), (int)floor((-scroll.y + GetMouseY()) / terrain.tileSize.y) };
 	if(IsMouseButtonPressed(0)) terrain.AddNewTile(layer, rotation, mPos, AssetList::GetNameAtPosition(currentTexture));
+	Vector2 cPos{ (int)floor((-scroll.x + GetScreenWidth() * 0.5f ) / terrain.tileSize.x), (int)floor((-scroll.y + terrain.tileSize.y * 0.5f + GetScreenWidth() * 0.5f) / terrain.tileSize.y)};
+	if(IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN)) terrain.AddNewTile(layer, rotation, cPos, AssetList::GetNameAtPosition(currentTexture));
 
-	if (GetMouseWheelMove()>0) {
+	//Change textures
+	if (GetMouseWheelMove()>0 || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_LEFT_TRIGGER_1)) {
 		if (currentTexture == 0)currentTexture = AssetList::SpriteList.size() - 1;
 		else currentTexture--;
 	}
-	if (GetMouseWheelMove() < 0) {
+	if (GetMouseWheelMove() < 0 || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_TRIGGER_1)) {
 		if (currentTexture == AssetList::SpriteList.size() - 1)currentTexture = 0;
 		else currentTexture++;
 	}
@@ -86,5 +95,7 @@ void Engine::Draw() {
 		Vector2{ 40,40 },
 		rotation,
 		WHITE);
+
+	DrawRectangle(GetScreenWidth() * 0.5f - 5, GetScreenHeight() * 0.5f - 5, 10, 10, BLACK);
 	EndDrawing();
 }
