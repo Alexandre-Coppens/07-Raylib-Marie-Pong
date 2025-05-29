@@ -19,10 +19,6 @@ public:
         int rotation{};
         int dictionaryTexture{};
     };
-    struct MapSave {
-        map<int, string> dictionary;
-        vector<vector<Tile>> terrain;
-    };
 
     static map<int, string> dictionary;
     static vector<vector<Tile>> terrain;
@@ -37,7 +33,12 @@ public:
 
     void Update();
 
-    void AddNewTile(int layer, int rotation, Vector2 pos, string name);
-    void RemoveTile();
-    int CheckInDictionary(string n);
+    static void AddNewTile(int layer, int rotation, Vector2 pos, string name);
+    static void RemoveTile(int layer, Vector2 pos);
+    static void AddToDictionary(int index, string name);
+    static int CheckInDictionary(string n);
+
+    static void SaveMap(string fileName);
+    static void LoadMap(string fileName);
+    static vector<string> BreakString(string str, char breacker);
 };

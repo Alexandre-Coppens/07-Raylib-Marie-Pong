@@ -38,8 +38,8 @@ void Engine::Update() {
 	if (IsKeyDown(KEY_A)) scroll.x += scrollSpeed.x * GetFrameTime();
 	if (IsKeyDown(KEY_D)) scroll.x -= scrollSpeed.x * GetFrameTime();
 
-	scroll.x -= GetGamepadAxisMovement(0, GAMEPAD_AXIS_RIGHT_X) * scrollSpeed.x * GetFrameTime();
-	scroll.y -= GetGamepadAxisMovement(0, GAMEPAD_AXIS_RIGHT_Y) * scrollSpeed.y * GetFrameTime();
+	scroll.x -= GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_X) * scrollSpeed.x * GetFrameTime();
+	scroll.y -= GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_Y) * scrollSpeed.y * GetFrameTime();
 
 	//Rotation + Layer change
 	if (IsKeyPressed(KEY_UP) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_LEFT_FACE_UP)) {
@@ -62,8 +62,10 @@ void Engine::Update() {
 	//Tiles placement
 	Vector2 mPos{ (int)floor((-scroll.x + GetMouseX()) / terrain.tileSize.x), (int)floor((-scroll.y + GetMouseY()) / terrain.tileSize.y) };
 	if(IsMouseButtonPressed(0)) terrain.AddNewTile(layer, rotation, mPos, AssetList::GetNameAtPosition(currentTexture));
+	if(IsMouseButtonPressed(1)) terrain.RemoveTile(layer, mPos);
 	Vector2 cPos{ (int)floor((-scroll.x + GetScreenWidth() * 0.5f ) / terrain.tileSize.x), (int)floor((-scroll.y + terrain.tileSize.y * 0.5f + GetScreenWidth() * 0.5f) / terrain.tileSize.y)};
 	if(IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN)) terrain.AddNewTile(layer, rotation, cPos, AssetList::GetNameAtPosition(currentTexture));
+	if (IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_FACE_RIGHT)) terrain.RemoveTile(layer, cPos);
 
 	//Change textures
 	if (GetMouseWheelMove()>0 || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_LEFT_TRIGGER_1)) {
@@ -74,6 +76,10 @@ void Engine::Update() {
 		if (currentTexture == AssetList::SpriteList.size() - 1)currentTexture = 0;
 		else currentTexture++;
 	}
+
+	//Save / Load
+	if(IsKeyPressed(KEY_O) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_MIDDLE_RIGHT))Terrain::SaveMap("CarTerrain");
+	if(IsKeyPressed(KEY_P) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_MIDDLE_LEFT))Terrain::LoadMap("CarTerrain");
 }
 
 void Engine::Draw() {
