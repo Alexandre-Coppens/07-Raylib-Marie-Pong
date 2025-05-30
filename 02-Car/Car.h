@@ -17,7 +17,7 @@ private:
     float speed{ 0 };
     Vector2 deltaSpeed{ 0,0 };
     float towardSpeed{ 0 };
-    Vector2 maxSpeed{ 500, -300 };
+    Vector2 maxSpeed{ 200, -75 };
     bool isAccelerating = false;
 
     float turnRate{ 1 };
