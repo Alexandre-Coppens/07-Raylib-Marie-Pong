@@ -20,13 +20,18 @@ static void DrawScreen(Vector2* scroll){
 		if (i < terrain->size()) {
 			if ((*terrain)[i].size() > 0) {
 				for (Terrain::Tile tile : (*terrain)[i]) {
-					Texture2D* sprite = &AssetList::SpriteList[Terrain::dictionary[tile.dictionaryTexture]];
-					DrawTexturePro(*sprite,
-						Rectangle{ 0, 0, (float)sprite->width, (float)sprite->height },
-						Rectangle{ scroll->x + (tile.position.x * Terrain::tileSize.x) + Terrain::tileSize.x * 0.5f, scroll->y + (tile.position.y * Terrain::tileSize.y) + Terrain::tileSize.y * 0.5f, Terrain::tileSize.x, Terrain::tileSize.y },
-						Vector2{ Terrain::tileSize.x * 0.5f, Terrain::tileSize.y * 0.5f },
-						tile.rotation,
-						WHITE);
+					if (tile.position.x * Terrain::tileSize.x > -scroll->x - Terrain::tileSize.y &&
+								tile.position.x * Terrain::tileSize.x < -scroll->x + GetScreenWidth() &&
+								tile.position.y * Terrain::tileSize.y > -scroll->y - Terrain::tileSize.y &&
+								tile.position.y * Terrain::tileSize.y < -scroll->y + GetScreenHeight()) {
+						Texture2D* sprite = &AssetList::SpriteList[Terrain::dictionary[tile.dictionaryTexture]];
+						DrawTexturePro(*sprite,
+							Rectangle{ 0, 0, (float)sprite->width, (float)sprite->height },
+							Rectangle{ scroll->x + (tile.position.x * Terrain::tileSize.x) + Terrain::tileSize.x * 0.5f, scroll->y + (tile.position.y * Terrain::tileSize.y) + Terrain::tileSize.y * 0.5f, Terrain::tileSize.x, Terrain::tileSize.y },
+							Vector2{ Terrain::tileSize.x * 0.5f, Terrain::tileSize.y * 0.5f },
+							tile.rotation,
+							WHITE);
+					}
 				}
 			}
 		}

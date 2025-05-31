@@ -18,6 +18,7 @@ public:
         short layer{};
         int rotation{};
         int dictionaryTexture{};
+        string modifier{};
     };
 
     static map<int, string> dictionary;
@@ -33,7 +34,7 @@ public:
 
     void Update();
 
-    static void AddNewTile(int layer, int rotation, Vector2 pos, string name);
+    static void AddNewTile(int layer, int rotation, Vector2 pos, string name, string modifier);
     static void RemoveTile(int layer, Vector2 pos);
     static void AddToDictionary(int index, string name);
     static int CheckInDictionary(string n);

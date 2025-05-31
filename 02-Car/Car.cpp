@@ -1,6 +1,9 @@
+#include <iostream>
 #include "Car.h"
+#include "Terrain.h"
 
 using std::to_string;
+using std::cout;
 
 Car::Car(){
 }
@@ -12,13 +15,12 @@ Car::Car(Vector2 _pos, Vector2 _size, Color _color){
 	color = _color;
 	type = GameObjectType::Car;
 	CreateRect();
-
 }
 
 Car::~Car(){
 }
 
-void Car::Update(){
+void Car::Update(Vector2* scroll){
 	towardSpeed = 0;
 	isAccelerating = false;
 
@@ -44,6 +46,25 @@ void Car::Update(){
 
 	position.x += deltaSpeed.x;
 	position.y += deltaSpeed.y;
+
+	Vector2 tilePos{ (int)floor((position.x + GetScreenWidth() * 0.5f - scroll->x) / (Terrain::tileSize.x *2)), (int)floor((position.y + GetScreenHeight() * 0.5f - scroll->y) / (Terrain::tileSize.y *2)) };
+	cout << "\n " << tilePos.x << " : " << tilePos.y << " = ";
+	for(auto t : Terrain::terrain){
+		for (auto i : t){
+			if (Vector2Equals(i.position, tilePos)) {
+				if (i.modifier == "Tires") {
+					position.x -= deltaSpeed.x;
+					position.y -= deltaSpeed.y;
+				}
+				if (i.modifier == "Grass") {
+					position.x -= deltaSpeed.x * 0.5f;
+					position.y -= deltaSpeed.y * 0.5f;
+				}
+				cout <<  i.modifier;
+				break;
+			}
+		}
+	}
 }
 
 void Car::Draw(Vector2* scroll) {

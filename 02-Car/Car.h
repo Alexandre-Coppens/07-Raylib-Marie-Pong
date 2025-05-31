@@ -38,5 +38,5 @@ public:
     ~Car();
 
     void Draw(Vector2* scroll);
-    void Update();
+    void Update(Vector2* scroll);
 };

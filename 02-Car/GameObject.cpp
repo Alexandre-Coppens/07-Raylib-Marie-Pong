@@ -22,7 +22,7 @@ GameObject::~GameObject(){
 	GameObjectList.erase(name);
 }
 
-void GameObject::Update() {
+void GameObject::Update(Vector2* scroll) {
 }
 
 void GameObject::Draw(Vector2* scroll) {

@@ -27,7 +27,7 @@ void Terrain::Update()
 {
 }
 
-void Terrain::AddNewTile(int layer,  int rotation, Vector2 pos, string name) {
+void Terrain::AddNewTile(int layer,  int rotation, Vector2 pos, string name, string modifier) {
 	int index = CheckInDictionary(name);
 
 	if (terrain.size() < maxLayer) {
@@ -35,7 +35,7 @@ void Terrain::AddNewTile(int layer,  int rotation, Vector2 pos, string name) {
 	}
 
 	if (terrain[layer].size() == 0) {
-		terrain[layer].push_back(Tile{ pos, (short)layer, rotation, index });
+		terrain[layer].push_back(Tile{ pos, (short)layer, rotation, index, modifier });
 		return;
 	}
 
@@ -47,7 +47,7 @@ void Terrain::AddNewTile(int layer,  int rotation, Vector2 pos, string name) {
 		else it++;
 	}
 
-	terrain[layer].push_back(Tile{ pos, (short)layer, rotation, index });
+	terrain[layer].push_back(Tile{ pos, (short)layer, rotation, index, modifier });
 }
 
 void Terrain::RemoveTile(int layer,  Vector2 pos){
@@ -106,8 +106,9 @@ void Terrain::LoadMap(string fileName){
 				vector<string> tile = BreakString(line, '$');
 				vector<string> posS = BreakString(tile[1], ':');
 				Vector2 posV  { stof(posS[0]), stof(posS[1]) };
-				AddNewTile(stoi(tile[2]), stoi(tile[3]), posV, dictionary[stoi(tile[4])]);
-			}
+				string family = BreakString(dictionary[stoi(tile[4])], '_')[0];
+				AddNewTile(stoi(tile[2]), stoi(tile[3]), posV, dictionary[stoi(tile[4])], family);
+			}	
 		}
 		loadFile.close();
 	}

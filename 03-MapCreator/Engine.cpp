@@ -102,6 +102,11 @@ void Engine::Draw() {
 		rotation,
 		WHITE);
 
+	if (GetFrameTime() != 0)
+	{
+		DrawText(TextFormat("CURRENT FPS: %i", (int)(1.0f / GetFrameTime())), 10, GetScreenHeight() - 30, 20, BLACK);
+	}
+
 	DrawRectangle(GetScreenWidth() * 0.5f - 5, GetScreenHeight() * 0.5f - 5, 10, 10, BLACK);
 	EndDrawing();
 }
