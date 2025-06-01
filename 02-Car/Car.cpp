@@ -47,6 +47,8 @@ void Car::Update(Vector2* scroll){
 	position.x += deltaSpeed.x;
 	position.y += deltaSpeed.y;
 
+	currentTimer += GetFrameTime();
+
 	Vector2 tilePos{ (int)floor((position.x + size.x * 0.5f) / (Terrain::tileSize.x)), (int)floor((position.y + size.y * 0.5f) / (Terrain::tileSize.y)) };
 	for (int i = Terrain::terrain.size()-1; i >= 0; i--) {
 		for (auto i : Terrain::terrain[i]) {
@@ -87,10 +89,13 @@ void Car::Draw(Vector2* scroll) {
 	Rectangle source = { posInSprite.x, posInSprite.y, sprite->width * 0.33f * ((flipX || speed < 0) && !(!flipX && speed < 0) ? -1 : 1), sprite->height * 0.33f};
 	Rectangle dest = { position.x - scroll->x, position.y - scroll->y, size.x, size.y };
 	DrawTexturePro(*sprite, source, dest, Vector2Zero(), 0, color);
-	DrawText(to_string(speed).c_str(), 10, 10, 20, GRAY);
 
-	Vector2 tilePos{ (int)floor((position.x + size.x * 0.5f) / (Terrain::tileSize.x)), (int)floor((position.y + size.y * 0.5f) / (Terrain::tileSize.y)) };
-	DrawRectangle(tilePos.x * Terrain::tileSize.x - scroll->x, tilePos.y * Terrain::tileSize.y - scroll->y, 5, 5, MAGENTA);
+	DrawTextPro(AssetList::textFont["jupiter_crash"], (to_string((int)currentTimer / 60) + " : " + to_string((int)currentTimer % 60) + "." + to_string((int)((currentTimer - floor(currentTimer)) * 100))).c_str(), Vector2{ 200, 0 }, Vector2{ 0,0 }, 0, 50, 5, DARKGRAY);
+	DrawTextPro(AssetList::textFont["jupiter_crash"], (to_string((int)bestTimer / 60) + " : " + to_string((int)bestTimer % 60) + "." + to_string((int)((bestTimer - floor(bestTimer))*100))).c_str(), Vector2{200, 50}, Vector2{0,0}, 0, 50, 5, ORANGE);
+	
+	//DrawText(to_string(speed).c_str(), 10, 10, 20, GRAY);
+	//Vector2 tilePos{ (int)floor((position.x + size.x * 0.5f) / (Terrain::tileSize.x)), (int)floor((position.y + size.y * 0.5f) / (Terrain::tileSize.y)) };
+	//DrawRectangle(tilePos.x * Terrain::tileSize.x - scroll->x, tilePos.y * Terrain::tileSize.y - scroll->y, 5, 5, MAGENTA);
 }
 
 void Car::CarSide() {

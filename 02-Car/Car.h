@@ -22,7 +22,7 @@ private:
 
     float turnRate{ 1 };
     float minTurnSpeed{ 50 };
-    float rotation{ 0 };
+    float rotation{ 7.85f };
 
     bool flipX{ false };
     Vector2 currentSprite{ 0,0 };
@@ -31,7 +31,7 @@ private:
     int currentCheckpoint{ 0 };
 
     float currentTimer{ 0 };
-    float bestTimer{ 0 };
+    float bestTimer{ 99999 };
 
 public:
 
