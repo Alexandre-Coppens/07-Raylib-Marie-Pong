@@ -1,6 +1,10 @@
 #include <iostream>
+#include <fstream>
 #include "Car.h"
 #include "Terrain.h"
+
+using std::ofstream;
+using std::ifstream;
 
 using std::to_string;
 using std::cout;
@@ -15,6 +19,7 @@ Car::Car(Vector2 _pos, Vector2 _size, Color _color){
 	color = _color;
 	type = GameObjectType::Car;
 	CreateRect();
+	LoadScore();
 }
 
 Car::~Car(){
@@ -70,6 +75,7 @@ void Car::Update(Vector2* scroll){
 						currentCheckpoint = 0;
 						if (currentTimer < bestTimer) bestTimer = currentTimer;
 						currentTimer = 0;
+						SaveScore();
 						cout << "Finished Lap!! \n";
 					}
 				}
@@ -108,4 +114,34 @@ void Car::CarSide() {
 	 currentSprite = { static_cast<float>(idot % 3), static_cast<float>(idot / 3) };
 
 	 flipX = Vector2DotProduct(ndeltaSpeed, Vector2{ 1,0 }) <= 0;
+}
+
+void Car::SaveScore() {
+	ofstream saveFile;
+	saveFile.open("HighScore_CarGame.txt");
+	if (saveFile.is_open()) {
+		saveFile << "H$" + to_string(bestTimer) + "\n";
+		saveFile.close();
+	}
+	else {
+		cout << "Could not load  HighScore_CarGame.txt \n";
+	}
+}
+
+void Car::LoadScore() {
+	string line;
+	ifstream loadFile("HighScore_CarGame.txt");
+
+	if (loadFile.is_open()) {
+		while (getline(loadFile, line)) {
+			if (line[0] == 'H') {
+				vector<string> l = Terrain::BreakString(line, '$');;
+				bestTimer = stof(l[1]);
+			}
+		}
+		loadFile.close();
+	}
+	else {
+		cout << "Could not load  HighScore_CarGame.txt \n";
+	}
 }

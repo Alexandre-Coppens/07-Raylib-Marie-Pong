@@ -38,6 +38,9 @@ public:
 private:
     void CarSide();
 
+    void SaveScore();
+    void LoadScore();
+
 public:
     Car();
     Car(Vector2 _pos, Vector2 _size, Color color);
