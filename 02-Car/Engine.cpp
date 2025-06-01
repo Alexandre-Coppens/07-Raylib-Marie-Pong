@@ -15,10 +15,20 @@ Engine::Engine() {
 
 void Engine::Start(){
 	assets = AssetList::GetInstance();
-	GameObject::CreateGameObject("Car",  10, new Car(Vector2{ 0, 0 }, Vector2{ 50,50 }, RED));
 	terrain.tileSize = Vector2{ 50,50 };
 	scroll = { -GetScreenWidth() * 0.5f ,-GetScreenHeight() * 0.5f };
 	Terrain::LoadMap("CarTerrain");
+
+	vector<Terrain::Tile*> startTile = Terrain::GetEveryTilesWithModifier("Start");
+	GameObject::CreateGameObject("Car", 10, new Car(Vector2{ startTile[0]->position.x * terrain.tileSize.x, startTile[0]->position.y * terrain.tileSize.y }, Vector2{50,50}, RED));
+	startTile = Terrain::GetEveryTilesWithModifier("Checkpoint");
+	int maxCheckpoint = 0;
+	for (auto t : startTile) {
+		cout << Terrain::BreakString(Terrain::dictionary[t->dictionaryTexture], '_')[1];
+		int checkpoint = stoi(Terrain::BreakString(Terrain::dictionary[t->dictionaryTexture], '_')[1]);
+		if (checkpoint > maxCheckpoint) maxCheckpoint = checkpoint;
+	}
+	static_cast<Car*>(GameObject::GetGameObjectWithName("Car"))->SetMaxCheckpoint(maxCheckpoint);
 }
 
 void Engine::Update() {

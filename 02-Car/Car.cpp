@@ -48,7 +48,6 @@ void Car::Update(Vector2* scroll){
 	position.y += deltaSpeed.y;
 
 	Vector2 tilePos{ (int)floor((position.x + size.x * 0.5f) / (Terrain::tileSize.x)), (int)floor((position.y + size.y * 0.5f) / (Terrain::tileSize.y)) };
-	cout << "\n " << tilePos.x << " : " << tilePos.y << " = ";
 	for (int i = Terrain::terrain.size()-1; i >= 0; i--) {
 		for (auto i : Terrain::terrain[i]) {
 			if (Vector2Equals(i.position, tilePos)) {
@@ -60,7 +59,18 @@ void Car::Update(Vector2* scroll){
 					position.x -= deltaSpeed.x * 0.5f;
 					position.y -= deltaSpeed.y * 0.5f;
 				}
-				cout <<  i.modifier;
+				if (i.modifier == "Checkpoint") {
+					int checkpoint = stoi(Terrain::BreakString(Terrain::dictionary[i.dictionaryTexture], '_')[1]);
+					if (checkpoint == currentCheckpoint + 1) currentCheckpoint ++;
+				}
+				if (i.modifier == "FinishLine") {
+					if (currentCheckpoint == maxCheckpoint) {
+						currentCheckpoint = 0;
+						if (currentTimer < bestTimer) bestTimer = currentTimer;
+						currentTimer = 0;
+						cout << "Finished Lap!! \n";
+					}
+				}
 				return;
 			}
 		}

@@ -27,6 +27,12 @@ private:
     bool flipX{ false };
     Vector2 currentSprite{ 0,0 };
 
+    int maxCheckpoint{ 0 };
+    int currentCheckpoint{ 0 };
+
+    float currentTimer{ 0 };
+    float bestTimer{ 0 };
+
 public:
 
 private:
@@ -39,4 +45,6 @@ public:
 
     void Draw(Vector2* scroll);
     void Update(Vector2* scroll);
+
+    void SetMaxCheckpoint(int n){ maxCheckpoint = n; }
 };

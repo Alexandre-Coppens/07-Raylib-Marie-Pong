@@ -34,6 +34,8 @@ public:
 
     void Update();
 
+    static vector<Tile*> GetEveryTilesWithModifier(string m);
+
     static void AddNewTile(int layer, int rotation, Vector2 pos, string name, string modifier);
     static void RemoveTile(int layer, Vector2 pos);
     static void AddToDictionary(int index, string name);

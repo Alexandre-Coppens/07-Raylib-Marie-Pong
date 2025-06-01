@@ -27,6 +27,16 @@ void Terrain::Update()
 {
 }
 
+vector<Terrain::Tile*> Terrain::GetEveryTilesWithModifier(string m){
+	vector<Tile*> tiles;
+	for (int i = 0; i < terrain.size(); i++) {
+		for (int j = 0; j < terrain[i].size(); j++) {
+			if (terrain[i][j].modifier == m) tiles.push_back(&terrain[i][ j]);
+		}
+	}
+	return tiles;
+}
+
 void Terrain::AddNewTile(int layer,  int rotation, Vector2 pos, string name, string modifier) {
 	int index = CheckInDictionary(name);
 
