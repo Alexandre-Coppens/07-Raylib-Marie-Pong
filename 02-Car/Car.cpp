@@ -47,10 +47,10 @@ void Car::Update(Vector2* scroll){
 	position.x += deltaSpeed.x;
 	position.y += deltaSpeed.y;
 
-	Vector2 tilePos{ (int)floor((position.x + GetScreenWidth() * 0.5f + scroll->x) / (Terrain::tileSize.x *2)), (int)floor((position.y + GetScreenHeight() * 0.5f + scroll->y) / (Terrain::tileSize.y *2)) };
+	Vector2 tilePos{ (int)floor((position.x + size.x * 0.5f) / (Terrain::tileSize.x)), (int)floor((position.y + size.y * 0.5f) / (Terrain::tileSize.y)) };
 	cout << "\n " << tilePos.x << " : " << tilePos.y << " = ";
-	for(auto t : Terrain::terrain){
-		for (auto i : t){
+	for (int i = Terrain::terrain.size()-1; i >= 0; i--) {
+		for (auto i : Terrain::terrain[i]) {
 			if (Vector2Equals(i.position, tilePos)) {
 				if (i.modifier == "Tires") {
 					position.x -= deltaSpeed.x;
@@ -61,7 +61,7 @@ void Car::Update(Vector2* scroll){
 					position.y -= deltaSpeed.y * 0.5f;
 				}
 				cout <<  i.modifier;
-				break;
+				return;
 			}
 		}
 	}
@@ -78,6 +78,9 @@ void Car::Draw(Vector2* scroll) {
 	Rectangle dest = { position.x - scroll->x, position.y - scroll->y, size.x, size.y };
 	DrawTexturePro(*sprite, source, dest, Vector2Zero(), 0, color);
 	DrawText(to_string(speed).c_str(), 10, 10, 20, GRAY);
+
+	Vector2 tilePos{ (int)floor((position.x + size.x * 0.5f) / (Terrain::tileSize.x)), (int)floor((position.y + size.y * 0.5f) / (Terrain::tileSize.y)) };
+	DrawRectangle(tilePos.x * Terrain::tileSize.x - scroll->x, tilePos.y * Terrain::tileSize.y - scroll->y, 5, 5, MAGENTA);
 }
 
 void Car::CarSide() {

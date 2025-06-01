@@ -59,7 +59,7 @@ void Engine::Draw() {
 	ClearBackground(GREEN);
 	DrawScreen(&scroll);
 	GameObject* car = GameObject::GetGameObjectWithName("Car");
-	DrawText(("X: " + to_string((car->position.x - scroll.x) / GetScreenWidth()) + "; Y: " + to_string((car->position.y - scroll.y) / GetScreenHeight())).c_str(), 10, 30, 20, ORANGE);
+	DrawText(("X: " + to_string(car->position.x) + "; Y: " + to_string(car->position.y )).c_str(), 10, 30, 20, ORANGE);
 	DrawText(("ScrollX: " + to_string(scroll.x) + "; ScrollY: " + to_string(scroll.y)).c_str(), 10, 50, 20, GRAY);
 	EndDrawing();
 }
