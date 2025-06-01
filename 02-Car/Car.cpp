@@ -47,7 +47,7 @@ void Car::Update(Vector2* scroll){
 	position.x += deltaSpeed.x;
 	position.y += deltaSpeed.y;
 
-	Vector2 tilePos{ (int)floor((position.x + GetScreenWidth() * 0.5f - scroll->x) / (Terrain::tileSize.x *2)), (int)floor((position.y + GetScreenHeight() * 0.5f - scroll->y) / (Terrain::tileSize.y *2)) };
+	Vector2 tilePos{ (int)floor((position.x + GetScreenWidth() * 0.5f + scroll->x) / (Terrain::tileSize.x *2)), (int)floor((position.y + GetScreenHeight() * 0.5f + scroll->y) / (Terrain::tileSize.y *2)) };
 	cout << "\n " << tilePos.x << " : " << tilePos.y << " = ";
 	for(auto t : Terrain::terrain){
 		for (auto i : t){
@@ -75,7 +75,7 @@ void Car::Draw(Vector2* scroll) {
 	};
 
 	Rectangle source = { posInSprite.x, posInSprite.y, sprite->width * 0.33f * ((flipX || speed < 0) && !(!flipX && speed < 0) ? -1 : 1), sprite->height * 0.33f};
-	Rectangle dest = { position.x + scroll->x, position.y + scroll->y, size.x, size.y };
+	Rectangle dest = { position.x - scroll->x, position.y - scroll->y, size.x, size.y };
 	DrawTexturePro(*sprite, source, dest, Vector2Zero(), 0, color);
 	DrawText(to_string(speed).c_str(), 10, 10, 20, GRAY);
 }
