@@ -4,7 +4,7 @@
 #include <vector>
 #include <map>
 #include "Raylib.h"
-#include "GameObject.h"
+#include "Actor.h"
 
 using std::string;
 using std::vector;

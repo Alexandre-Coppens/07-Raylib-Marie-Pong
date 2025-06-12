@@ -4,13 +4,13 @@
 #include <vector>
 #include <map>
 #include "Raylib.h"
-#include "GameObject.h"
+#include "Actor.h"
 
 using std::string;
 using std::vector;
 using std::map;
 
-class Cursor : public GameObject{
+class Cursor : public Actor{
 private:
 public:
 

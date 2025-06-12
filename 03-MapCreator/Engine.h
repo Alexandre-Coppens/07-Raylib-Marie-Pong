@@ -1,5 +1,9 @@
 #pragma once
 
+#include "raylib.h"
+#include "rlgl.h"
+#include "raymath.h"
+
 #include <string>
 #include <vector>
 #include "AssetsList.h"

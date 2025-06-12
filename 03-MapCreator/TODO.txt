@@ -1,6 +1,5 @@
-* -Save and Load Maps
-* -Create Circuit Tiles
-* -Make the circuit and put it on the car game
-
-Car physics
-Collisions
+UI To choose the tile you want to use
+Selection tool
++Ctrl C - Ctrl V
++Rotate Selection
+Families of tiles

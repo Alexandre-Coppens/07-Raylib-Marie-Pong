@@ -18,11 +18,11 @@ enum class GameObjectType {
     None
 };
 
-class GameObject {
+class Actor {
 private:
 protected:
-    static map<string, GameObject*> GameObjectList;
-    static vector<vector<GameObject*>> GameObjectsByLayer;
+    static map<string, Actor*> ActorList;
+    static vector<vector<Actor*>> GameObjectsByLayer;
     Rectangle rect;
 public:
     bool enabled{ true };
@@ -42,9 +42,9 @@ protected:
     void CreateRect();
 
 public:
-    GameObject();
-    GameObject(bool _enabled, string _name, Vector2 _pos, Vector2 _size, Texture2D* _sprite, GameObjectType _type);
-    virtual ~GameObject();
+    Actor();
+    Actor(bool _enabled, string _name, Vector2 _pos, Vector2 _size, Texture2D* _sprite, GameObjectType _type);
+    virtual ~Actor();
     
     virtual void Update();
     virtual void Draw(Vector2 scroll);
@@ -58,12 +58,12 @@ public:
     //Collision Gestion
     virtual void Collided();
 
-    static void CreateGameObject(const string id, GameObject* gO);
+    static void CreateGameObject(const string id, Actor* gO);
 
-    static GameObject* GetGameObjectWithName(string _name);
-    static vector<GameObject*> GetAllGameObjects();
-    static vector<vector<GameObject*>>* GetAllGameObjectsLayered();
-    static vector<GameObject*> GetAllGameObjectsWith(GameObjectType type);
+    static Actor* GetGameObjectWithName(string _name);
+    static vector<Actor*> GetAllGameObjects();
+    static vector<vector<Actor*>>* GetAllGameObjectsLayered();
+    static vector<Actor*> GetAllGameObjectsWith(GameObjectType type);
     
     static void DestroyGameObjectList();
 };

@@ -36,7 +36,7 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Fichiers sources\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="Actor.cpp">
       <Filter>Fichiers sources\Engine</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -59,11 +59,14 @@
     <ClInclude Include="Engine.h">
       <Filter>Fichiers de ressources\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="Actor.h">
       <Filter>Fichiers de ressources\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Terrain.h">
       <Filter>Fichiers de ressources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_SelectionTool.h">
+      <Filter>Fichiers de ressources\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

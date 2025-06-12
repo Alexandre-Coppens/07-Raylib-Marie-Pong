@@ -24,8 +24,8 @@ void Engine::Start(){
 
 void Engine::Update() {
 
-	vector<GameObject*> goList = GameObject::GetAllGameObjects();
-	for (GameObject* go : goList) {
+	vector<Actor*> goList = Actor::GetAllGameObjects();
+	for (Actor* go : goList) {
 		if (go->enabled) go->Update();
 		if (go->needToDestroy) {
 			delete go;
@@ -33,10 +33,9 @@ void Engine::Update() {
 	}
 
 	//Move
-	if (IsKeyDown(KEY_W)) scroll.y += scrollSpeed.y * GetFrameTime();
-	if (IsKeyDown(KEY_S)) scroll.y -= scrollSpeed.y * GetFrameTime();
-	if (IsKeyDown(KEY_A)) scroll.x += scrollSpeed.x * GetFrameTime();
-	if (IsKeyDown(KEY_D)) scroll.x -= scrollSpeed.x * GetFrameTime();
+	if (IsMouseButtonDown(2)) {
+		scroll = Vector2Add(scroll, GetMouseDelta());
+	}
 
 	scroll.x -= GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_X) * scrollSpeed.x * GetFrameTime();
 	scroll.y -= GetGamepadAxisMovement(0, GAMEPAD_AXIS_LEFT_Y) * scrollSpeed.y * GetFrameTime();
@@ -78,13 +77,19 @@ void Engine::Update() {
 	}
 
 	//Save / Load
-	if(IsKeyPressed(KEY_O) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_MIDDLE_RIGHT))Terrain::SaveMap("CarTerrain");
-	if(IsKeyPressed(KEY_P) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_MIDDLE_LEFT))Terrain::LoadMap("CarTerrain");
+	if((IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_S)) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_MIDDLE_RIGHT))Terrain::SaveMap("CarTerrain");
+	if((IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_O)) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_MIDDLE_LEFT))Terrain::LoadMap("CarTerrain");
 }
 
 void Engine::Draw() {
 	BeginDrawing();
 	ClearBackground(RAYWHITE);
+
+	rlPushMatrix();
+	rlTranslatef(0 + scroll.x, 25 * 50 + scroll.y, 0);
+	rlRotatef(90, 1, 0, 0);
+	DrawGrid(100, 50);
+	rlPopMatrix();
 	
 	DrawScreen(&scroll);
 	
