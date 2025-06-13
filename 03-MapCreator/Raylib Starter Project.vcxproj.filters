@@ -45,6 +45,9 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>Fichiers sources\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="UI_TilesMenu.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetsList.h">
@@ -65,7 +68,7 @@
     <ClInclude Include="Terrain.h">
       <Filter>Fichiers de ressources\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="UI_SelectionTool.h">
+    <ClInclude Include="UI_TilesMenu.h">
       <Filter>Fichiers de ressources\Game</Filter>
     </ClInclude>
   </ItemGroup>

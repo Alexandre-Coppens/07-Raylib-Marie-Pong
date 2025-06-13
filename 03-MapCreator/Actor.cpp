@@ -1,13 +1,13 @@
 #include "Actor.h"
 
 map<string, Actor*> Actor::ActorList;
-vector<vector<Actor*>> Actor::GameObjectsByLayer;
+vector<vector<Actor*>> Actor::ActorsByLayer;
 
 Actor::Actor(){
 	CreateRect();
 }
 
-Actor::Actor(bool _enabled, string _name, Vector2 _pos, Vector2 _size, Texture2D* _sprite, GameObjectType _type) {
+Actor::Actor(bool _enabled, string _name, Vector2 _pos, Vector2 _size, Texture2D* _sprite, ActorType _type) {
 	enabled = _enabled;
 	name = _name;
 	position = _pos;
@@ -44,12 +44,12 @@ void Actor::CreateRect(){
 void Actor::Collided(){
 }
 
-void Actor::CreateGameObject(const string id, Actor* gO){
+void Actor::CreateActor(const string id, Actor* gO){
 	gO->name = id;
 	ActorList[id] = gO;
 }
 
-Actor* Actor::GetGameObjectWithName(string _name) {
+Actor* Actor::GetActorWithName(string _name) {
 	for (auto const& i : ActorList) {
 		if (i.first == _name) {
 			return const_cast<Actor*>(i.second);
@@ -58,7 +58,7 @@ Actor* Actor::GetGameObjectWithName(string _name) {
 	return nullptr;
 }
 
-vector<Actor*> Actor::GetAllGameObjects()
+vector<Actor*> Actor::GetAllActors()
 {
 	vector<Actor*> ret;
 	for (auto const& i : ActorList) {
@@ -67,12 +67,12 @@ vector<Actor*> Actor::GetAllGameObjects()
 	return ret;
 }
 
-vector<vector<Actor*>>* Actor::GetAllGameObjectsLayered()
+vector<vector<Actor*>>* Actor::GetAllActorsLayered()
 {
-	return &GameObjectsByLayer;
+	return &ActorsByLayer;
 }
 
-vector<Actor*> Actor::GetAllGameObjectsWith(GameObjectType type){
+vector<Actor*> Actor::GetAllActorsWith(ActorType type){
 	vector<Actor*> ret;
 	for(auto const& i : ActorList){
 		if (i.second->type == type) {
@@ -82,7 +82,7 @@ vector<Actor*> Actor::GetAllGameObjectsWith(GameObjectType type){
     return ret;
 }
 
-void Actor::DestroyGameObjectList(){
+void Actor::DestroyActorList(){
 	ActorList.clear();
 }
 

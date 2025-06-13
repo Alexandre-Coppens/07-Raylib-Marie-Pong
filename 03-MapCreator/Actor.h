@@ -11,7 +11,7 @@ using std::string;
 using std::vector;
 using std::map;
 
-enum class GameObjectType {
+enum class ActorType {
     Car,
     Wall,
     Background,
@@ -22,7 +22,7 @@ class Actor {
 private:
 protected:
     static map<string, Actor*> ActorList;
-    static vector<vector<Actor*>> GameObjectsByLayer;
+    static vector<vector<Actor*>> ActorsByLayer;
     Rectangle rect;
 public:
     bool enabled{ true };
@@ -35,7 +35,7 @@ public:
     short layer{ 0 };
     Texture2D* sprite{};
     Color color{WHITE};
-    GameObjectType type{ GameObjectType::None};
+    ActorType type{ ActorType::None};
 
 private:
 protected:
@@ -43,7 +43,7 @@ protected:
 
 public:
     Actor();
-    Actor(bool _enabled, string _name, Vector2 _pos, Vector2 _size, Texture2D* _sprite, GameObjectType _type);
+    Actor(bool _enabled, string _name, Vector2 _pos, Vector2 _size, Texture2D* _sprite, ActorType _type);
     virtual ~Actor();
     
     virtual void Update();
@@ -58,12 +58,12 @@ public:
     //Collision Gestion
     virtual void Collided();
 
-    static void CreateGameObject(const string id, Actor* gO);
+    static void CreateActor(const string id, Actor* gO);
 
-    static Actor* GetGameObjectWithName(string _name);
-    static vector<Actor*> GetAllGameObjects();
-    static vector<vector<Actor*>>* GetAllGameObjectsLayered();
-    static vector<Actor*> GetAllGameObjectsWith(GameObjectType type);
+    static Actor* GetActorWithName(string _name);
+    static vector<Actor*> GetAllActors();
+    static vector<vector<Actor*>>* GetAllActorsLayered();
+    static vector<Actor*> GetAllActorsWith(ActorType type);
     
-    static void DestroyGameObjectList();
+    static void DestroyActorList();
 };

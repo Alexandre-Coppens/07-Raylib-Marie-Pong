@@ -128,5 +128,3 @@ AssetList* AssetList::GetInstance() {
     }
     return instance;
 }
-
-

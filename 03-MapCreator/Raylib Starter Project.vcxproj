@@ -140,6 +140,7 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="UI_TilesMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetsList.h" />
@@ -148,7 +149,7 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Terrain.h" />
-    <ClInclude Include="UI_SelectionTool.h" />
+    <ClInclude Include="UI_TilesMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

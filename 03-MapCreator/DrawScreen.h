@@ -12,7 +12,7 @@ static void DrawScreen(Vector2* scroll);
 
 //Draw the terrain and the gameObjects on screen
 static void DrawScreen(Vector2* scroll){
-	vector<vector<Actor*>>* goList = Actor::GetAllGameObjectsLayered();
+	vector<vector<Actor*>>* goList = Actor::GetAllActorsLayered();
 	vector<vector<Terrain::Tile>>* terrain = &Terrain::terrain;
 
 	short max = fmax(terrain->size(), goList->size());

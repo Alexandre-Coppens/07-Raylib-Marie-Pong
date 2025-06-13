@@ -24,7 +24,7 @@ void Engine::Start(){
 
 void Engine::Update() {
 
-	vector<Actor*> goList = Actor::GetAllGameObjects();
+	vector<Actor*> goList = Actor::GetAllActors();
 	for (Actor* go : goList) {
 		if (go->enabled) go->Update();
 		if (go->needToDestroy) {
