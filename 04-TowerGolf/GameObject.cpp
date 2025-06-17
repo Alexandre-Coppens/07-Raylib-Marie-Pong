@@ -1,0 +1,103 @@
+#include "GameObject.h"
+#include "GolfBall.h"
+
+map<string, GameObject*> GameObject::GameObjectList;
+vector<vector<GameObject*>> GameObject::GameObjectsByLayer;
+
+GameObject::GameObject(){
+	CreateRect();
+}
+
+GameObject::GameObject(bool _enabled, string _name, Vector2 _pos, Vector2 _size, Texture2D* _sprite, GameObjectType _type) {
+	enabled = _enabled;
+	name = _name;
+	position = _pos;
+	size = _size;
+	sprite = _sprite;
+	type = _type;
+
+	CreateRect();
+}
+
+GameObject::~GameObject(){
+	GameObjectList.erase(name);
+}
+
+void GameObject::Start() {
+}
+
+void GameObject::Update(Vector2* scroll) {
+}
+
+void GameObject::Draw(Vector2* scroll) {
+	DrawTextureRec(*sprite, rect, Vector2Add(position, *scroll), WHITE);
+}
+
+bool GameObject::IsCursorInBounds(){
+	if (!enabled)return false;
+	return GetMouseX() >= position.x && GetMouseX() <= position.x + size.x && GetMouseY() >= position.y && GetMouseY() <= position.y + size.y;
+}
+
+void GameObject::CreateRect(){
+	rect.x = 0;
+	rect.y = 0;
+	rect.width = size.x;
+	rect.height = size.y;
+}
+
+void GameObject::Collided(){
+}
+
+void GameObject::CreateGameObject(const string id, int layer,GameObject* gO){
+	gO->name = id;
+	GameObjectList[id] = gO;
+	if (GameObjectsByLayer.size() < layer+1) {
+		GameObjectsByLayer.resize(layer+1);
+	}
+	GameObjectsByLayer[layer].push_back(gO);
+}
+
+GameObject* GameObject::GetGameObjectWithName(string _name) {
+	for (auto const& i : GameObjectList) {
+		if (i.first == _name) {
+			return const_cast<GameObject*>(i.second);
+		}
+	}
+	return nullptr;
+}
+
+vector<GameObject*> GameObject::GetAllGameObjects()
+{
+	vector<GameObject*> ret;
+	for (auto const& i : GameObjectList) {
+		ret.push_back(const_cast<GameObject*>(i.second));
+	}
+	return ret;
+}
+
+vector<vector<GameObject*>>* GameObject::GetAllGameObjectsLayered()
+{
+	return &GameObjectsByLayer;
+}
+
+vector<GameObject*> GameObject::GetAllGameObjectsWith(GameObjectType type){
+	vector<GameObject*> ret;
+	for(auto const& i : GameObjectList){
+		if (i.second->type == type) {
+			ret.push_back(const_cast<GameObject*>(i.second));
+		}
+	}
+    return ret;
+}
+
+void GameObject::DestroyGameObjectList(){
+	GameObjectList.clear();
+}
+
+int GameObject::Clicked() {
+	return 0;
+}
+
+void GameObject::Destroy() {
+	needToDestroy = true;
+}
