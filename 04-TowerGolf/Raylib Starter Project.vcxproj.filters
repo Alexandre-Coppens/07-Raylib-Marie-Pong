@@ -13,45 +13,57 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers sources\Engine">
+      <UniqueIdentifier>{a961b177-3ebc-4964-87ad-6ac0e5512716}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game">
+      <UniqueIdentifier>{aaaf8842-6a73-47a2-84c0-066fd5fdc79b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers de ressources\Engine">
+      <UniqueIdentifier>{8acb993a-20dc-4c5d-8b43-cd83554ab5b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers de ressources\Game">
+      <UniqueIdentifier>{b993cd1c-06e8-49be-8518-cee437ff4cbb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="AssetsList.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Engine</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Car.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>Fichiers sources\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GolfBall.cpp">
+      <Filter>Fichiers sources\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine.h">
-      <Filter>Fichiers de ressources</Filter>
-    </ClInclude>
     <ClInclude Include="AssetsList.h">
-      <Filter>Fichiers de ressources</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Fichiers de ressources</Filter>
-    </ClInclude>
-    <ClInclude Include="Car.h">
-      <Filter>Fichiers de ressources</Filter>
+      <Filter>Fichiers de ressources\Engine</Filter>
     </ClInclude>
     <ClInclude Include="DrawScreen.h">
-      <Filter>Fichiers de ressources</Filter>
+      <Filter>Fichiers de ressources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Fichiers de ressources\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Terrain.h">
-      <Filter>Fichiers de ressources</Filter>
+      <Filter>Fichiers de ressources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Fichiers de ressources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GolfBall.h">
+      <Filter>Fichiers de ressources\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
