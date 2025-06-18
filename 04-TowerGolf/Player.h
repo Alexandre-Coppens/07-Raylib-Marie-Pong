@@ -11,26 +11,26 @@ using std::string;
 using std::vector;
 using std::map;
 
-class GolfBall : public GameObject {
+class Player : public GameObject {
 private:
     Vector2 startPos{};
     Vector2 endPos{};
     vector<vector<Vector2>> path{};
     int currentPath{};
-    int currentTile{1};
+    int currentTile{ 1 };
     float speed = 50;
 
 public:
 
 private:
 public:
-    GolfBall();
-    GolfBall(Vector2 _pos, Vector2 _size, Color color);
-    ~GolfBall();
+    Player();
+    Player(Vector2 _pos, Vector2 _size, Color color);
+    ~Player();
 
     void Start();
     void Update(Vector2* scroll);
     void Draw(Vector2* scroll);
 
     void CreatePaths(vector<Terrain::Tile*> pathTiles, vector<Vector2> currentPath);
-};
+}

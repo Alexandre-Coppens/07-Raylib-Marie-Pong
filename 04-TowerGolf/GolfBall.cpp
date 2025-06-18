@@ -34,20 +34,17 @@ void GolfBall::Start() {
 	startPos.x = (startPos.x + 0.5f) * Terrain::tileSize.x;
 	startPos.y = (startPos.y + 0.5f) * Terrain::tileSize.y;
 	position = startPos;
+
+	currentPath = GetRandomValue(0, 2);
 }
 
 void GolfBall::Update(Vector2* scroll) {
-	if (timer > 0.33f) {
-		startPos = path[1][cpath];
-		startPos.x = (startPos.x + 0.5f) * Terrain::tileSize.x;
-		startPos.y = (startPos.y + 0.5f) * Terrain::tileSize.y;
-		position = startPos;
-		timer = 0;
-		cpath++;
+	Vector2 next = Vector2Add(Vector2Multiply(path[currentPath][currentTile], Terrain::tileSize), Vector2Multiply(Terrain::tileSize, Vector2{ 0.5f, 0.5f }));
+	position = Vector2MoveTowards(position, next, speed * GetFrameTime());
+	if (Vector2Distance(position, next) < 0.1f) {
+		currentTile++;
 	}
-	else {
-		timer += GetFrameTime();
-	}
+	cout << Vector2Distance(position, next) << "\n";
 }
 
 void GolfBall::Draw(Vector2* scroll) {
