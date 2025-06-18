@@ -20,8 +20,7 @@ void Engine::Start(){
 	Terrain::LoadMap("TowerPath");
 
 //Create Objects Here
-	GameObject::CreateGameObject("GolfBallTest", 10, new GolfBall(Vector2{ 0, 0 }, Vector2{ 50,50 }, RED));
-
+	GameObject::CreateGameObject("GolfBallTest", 10, new GolfBall(Vector2{ 0, 0 }, Vector2{ 20,20 }, RED));
 
 	vector<GameObject*> goList = GameObject::GetAllGameObjects();
 	for (GameObject* go : goList) {

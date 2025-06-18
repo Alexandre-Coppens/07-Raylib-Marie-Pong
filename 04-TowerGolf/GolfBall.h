@@ -5,6 +5,7 @@
 #include <map>
 #include "Raylib.h"
 #include "GameObject.h"
+#include "Terrain.h"
 
 using std::string;
 using std::vector;
@@ -13,7 +14,10 @@ using std::map;
 class GolfBall : public GameObject {
 private:
     Vector2 startPos{};
-    vector<Vector2> path{};
+    Vector2 endPos{};
+    vector<vector<Vector2>> path{};
+    float timer;
+    int cpath = 0;
 public:
 
 private:
@@ -25,4 +29,6 @@ public:
     void Start();
     void Update(Vector2* scroll);
     void Draw(Vector2* scroll);
+
+    void CreatePaths(vector<Terrain::Tile*> pathTiles, vector<Vector2> currentPath);
 };

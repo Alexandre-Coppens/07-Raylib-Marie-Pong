@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include "GolfBall.h"
-#include "Terrain.h"
 
 using std::ofstream;
 using std::ifstream;
@@ -13,7 +12,7 @@ GolfBall::GolfBall() {
 }
 
 GolfBall::GolfBall(Vector2 _pos, Vector2 _size, Color _color) {
-	sprite = &AssetList::SpriteList["SpriteSheet_Car"];
+	sprite = &AssetList::SpriteList["Unknown"];
 	position = _pos;
 	size = _size;
 	color = _color;
@@ -25,13 +24,58 @@ GolfBall::~GolfBall() {
 }
 
 void GolfBall::Start() {
-	vector<Terrain::Tile*> startTile = Terrain::GetEveryTilesWithModifier("Start");
-	startTile = Terrain::GetEveryTilesWithModifier("Checkpoint");
+	//Calculate a path to the end, NEED TO PUT ON THE SPAWNER AND NOT THE BALL;
+	startPos = Terrain::GetEveryTilesWithModifier("Spawn")[0]->position;
+	vector<Terrain::Tile*> pathTiles = Terrain::GetEveryTilesWithModifier("Path");
+	pathTiles.push_back(Terrain::GetEveryTilesWithModifier("End")[0]);
+
+	CreatePaths(pathTiles, vector<Vector2> {startPos});
+
+	startPos.x = (startPos.x + 0.5f) * Terrain::tileSize.x;
+	startPos.y = (startPos.y + 0.5f) * Terrain::tileSize.y;
+	position = startPos;
 }
 
 void GolfBall::Update(Vector2* scroll) {
+	if (timer > 0.33f) {
+		startPos = path[1][cpath];
+		startPos.x = (startPos.x + 0.5f) * Terrain::tileSize.x;
+		startPos.y = (startPos.y + 0.5f) * Terrain::tileSize.y;
+		position = startPos;
+		timer = 0;
+		cpath++;
+	}
+	else {
+		timer += GetFrameTime();
+	}
 }
 
 void GolfBall::Draw(Vector2* scroll) {
-	//DrawTexturePro(*sprite, source, dest, Vector2Zero(), 0, color);
+	Rectangle source{0, 0, sprite->width, sprite->height};
+	Rectangle dest{position.x - scroll->x, position.y - scroll->y, size.x, size.y};
+	DrawTexturePro(*sprite, source, dest, Vector2{size.x * 0.5f, size.y * 0.5f}, 0, color);
+}
+
+void GolfBall::CreatePaths(vector<Terrain::Tile*> pathTiles, vector<Vector2> currentPath) {
+	if (pathTiles.size() == 0) return;
+	Vector2 currentTile = currentPath[currentPath.size() - 1];
+	for (int i = 0; i < pathTiles.size(); i++) {
+		if ((pathTiles[i]->position.x == currentTile.x + 1 && currentTile.y == pathTiles[i]->position.y) ||
+			(pathTiles[i]->position.x == currentTile.x - 1 && currentTile.y == pathTiles[i]->position.y) ||
+			(pathTiles[i]->position.x == currentTile.x && currentTile.y + 1 == pathTiles[i]->position.y) ||
+			(pathTiles[i]->position.x == currentTile.x && currentTile.y - 1 == pathTiles[i]->position.y)) {
+
+			currentPath.push_back(pathTiles[i]->position);
+			if (Terrain::dictionary[pathTiles[i]->dictionaryTexture] == "End") {
+				path.push_back(currentPath);
+				return;
+			}
+			
+			vector<Terrain::Tile*> pathLeft = pathTiles;
+			pathLeft.erase(pathLeft.begin() + i);
+			CreatePaths(pathLeft, currentPath);
+			currentPath.pop_back();
+		}
+	}
+	return;
 }
