@@ -45,6 +45,9 @@
     <ClCompile Include="GolfBall.cpp">
       <Filter>Fichiers sources\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetsList.h">
@@ -63,6 +66,9 @@
       <Filter>Fichiers de ressources\Game</Filter>
     </ClInclude>
     <ClInclude Include="GolfBall.h">
+      <Filter>Fichiers de ressources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
       <Filter>Fichiers de ressources\Game</Filter>
     </ClInclude>
   </ItemGroup>
