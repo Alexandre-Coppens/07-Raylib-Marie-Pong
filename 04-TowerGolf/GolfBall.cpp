@@ -44,7 +44,7 @@ void GolfBall::Update(Vector2* scroll) {
 	if (Vector2Distance(position, next) < 0.1f) {
 		currentTile++;
 	}
-	cout << Vector2Distance(position, next) << "\n";
+	//cout << Vector2Distance(position, next) << "\n";
 }
 
 void GolfBall::Draw(Vector2* scroll) {

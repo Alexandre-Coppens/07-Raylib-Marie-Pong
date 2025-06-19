@@ -3,7 +3,9 @@
 #include "Terrain.h"
 #include "Engine.h"
 #include "DrawScreen.h"
+
 #include "GolfBall.h"
+#include "Player.h"
 
 using std::cout;
 using std::to_string;
@@ -21,6 +23,7 @@ void Engine::Start(){
 
 //Create Objects Here
 	GameObject::CreateGameObject("GolfBallTest", 10, new GolfBall(Vector2{ 0, 0 }, Vector2{ 20,20 }, RED));
+	GameObject::CreateGameObject("Player", 10, new Player(Vector2{ 0, 0 }, Vector2{ 20,20 }, RED));
 
 	vector<GameObject*> goList = GameObject::GetAllGameObjects();
 	for (GameObject* go : goList) {

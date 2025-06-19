@@ -31,6 +31,6 @@ public:
     void Start();
     void Update(Vector2* scroll);
     void Draw(Vector2* scroll);
-
-    void CreatePaths(vector<Terrain::Tile*> pathTiles, vector<Vector2> currentPath);
-}
+    
+    void MouseInteract(Vector2* scroll);
+};

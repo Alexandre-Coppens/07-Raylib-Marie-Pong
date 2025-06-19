@@ -27,7 +27,37 @@ void Player::Start() {
 }
 
 void Player::Update(Vector2* scroll) {
+	if (IsMouseButtonPressed(0)) MouseInteract(scroll);
 }
 
 void Player::Draw(Vector2* scroll) {
+}
+
+void Player::MouseInteract(Vector2* scroll) {
+	short isOnPath = 0; //0 = no, 1 = near a path, 2 = on a path
+	Vector2 pathPosition;
+	Vector2 mPos{ (int)floor(( GetMouseX() - scroll->x) / Terrain::tileSize.x), (int)floor((GetMouseY() - scroll->y) / Terrain::tileSize.y) };
+	vector<Terrain::Tile*> pathTiles = Terrain::GetEveryTilesWithModifier("Path");
+	for (int i = 0; i < pathTiles.size(); i++) {
+		pathPosition = Vector2Subtract(pathTiles[i]->position, Vector2Divide(*scroll, Terrain::tileSize));
+		if (Vector2Equals(pathPosition, mPos)) {
+			isOnPath = 2;
+			break;
+		}
+		else if (Vector2Equals(pathPosition, Vector2Add(mPos, Vector2{ 0, 1 }))) {
+			isOnPath = 1;
+		}
+		else if (Vector2Equals(pathPosition, Vector2Add(mPos, Vector2{ 0, -1 }))) {
+			isOnPath = 1;
+		}
+		else if (Vector2Equals(pathPosition, Vector2Add(mPos, Vector2{ 1, 0 }))) {
+			isOnPath = 1;
+		}
+		else if (Vector2Equals(pathPosition, Vector2Add(mPos, Vector2{ -1, 0 }))) {
+			isOnPath = 1;
+		}
+	}
+	if (isOnPath == 2) cout << "This is a Path Tile";
+	else if (isOnPath == 1) cout << "This is a Tile near the Path";
+	else cout << "This is Null";
 }
