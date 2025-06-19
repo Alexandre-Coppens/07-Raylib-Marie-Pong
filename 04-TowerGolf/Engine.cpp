@@ -6,6 +6,7 @@
 
 #include "GolfBall.h"
 #include "Player.h"
+#include "UIBackground.h"
 
 using std::cout;
 using std::to_string;
@@ -24,6 +25,7 @@ void Engine::Start(){
 //Create Objects Here
 	GameObject::CreateGameObject("GolfBallTest", 10, new GolfBall(Vector2{ 0, 0 }, Vector2{ 20,20 }, RED));
 	GameObject::CreateGameObject("Player", 10, new Player(Vector2{ 0, 0 }, Vector2{ 20,20 }, RED));
+	GameObject::CreateGameObject("UIBackground", 10, new UIBackground());
 
 	vector<GameObject*> goList = GameObject::GetAllGameObjects();
 	for (GameObject* go : goList) {

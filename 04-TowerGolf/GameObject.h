@@ -13,6 +13,7 @@ using std::map;
 
 enum class GameObjectType {
     GolfBall,
+    UI,
     None
 };
 

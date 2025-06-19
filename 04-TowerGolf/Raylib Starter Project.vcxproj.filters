@@ -25,6 +25,12 @@
     <Filter Include="Fichiers de ressources\Game">
       <UniqueIdentifier>{b993cd1c-06e8-49be-8518-cee437ff4cbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers de ressources\Game\UI">
+      <UniqueIdentifier>{c8e5af4e-8f98-4210-b903-cf431df8c6a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game\UI">
+      <UniqueIdentifier>{0278e25a-f119-4b7a-b272-643ce3749e56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetsList.cpp">
@@ -48,6 +54,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Fichiers sources\Game</Filter>
     </ClCompile>
+    <ClCompile Include="UIBackground.cpp">
+      <Filter>Fichiers sources\Game\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetsList.h">
@@ -70,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Fichiers de ressources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBackground.h">
+      <Filter>Fichiers de ressources\Game\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -141,6 +141,7 @@
     <ClCompile Include="GolfBall.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="UIBackground.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetsList.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="GolfBall.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="UIBackground.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
