@@ -23,24 +23,24 @@ void Engine::Start(){
 	Terrain::LoadMap("TowerPath");
 
 //Create Objects Here
-	GameObject::CreateGameObject("GolfBallTest", 10, new GolfBall(Vector2{ 0, 0 }, Vector2{ 20,20 }, RED));
-	GameObject::CreateGameObject("Player", 10, new Player(Vector2{ 0, 0 }, Vector2{ 20,20 }, RED));
-	GameObject::CreateGameObject("UIBackground", 10, new UIBackground());
+	Actor::CreateActor("GolfBallTest", 3, new GolfBall(Vector2{ 0, 0 }, Vector2{ 20,20 }, RED));
+	Actor::CreateActor("Player", 0, new Player());
+	Actor::CreateActor("UIBackground", 10, new UIBackground());
 
-	vector<GameObject*> goList = GameObject::GetAllGameObjects();
-	for (GameObject* go : goList) {
+	vector<Actor*> goList = Actor::GetAllActors();
+	for (Actor* go : goList) {
 		go->Start();
 	}
 }
 
 void Engine::Update() {
 
-	vector<GameObject*> goList = GameObject::GetAllGameObjects();
-	for (GameObject* go : goList) {
-		if (go->enabled) go->Update(&scroll);
-		if (go->needToDestroy) {
-			delete go;
+	vector<Actor*> goList = Actor::GetAllActors();
+	for (int i = 0; i < goList.size(); i++) {
+		if (goList[i]->needToDestroy) {
+			Actor::RemoveActorFromLists(goList[i]);
 		}
+		else if (goList[i]->enabled) goList[i]->Update(&scroll);
 	}
 
 	bool notInBound = true;

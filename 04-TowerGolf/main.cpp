@@ -7,7 +7,7 @@ Engine engine;
 
 int main()
 {
-    InitWindow(590, 650, "Raylib");
+    InitWindow(700, 650, "Golf Defense");
     SetTargetFPS(60);
 
     InitAudioDevice();

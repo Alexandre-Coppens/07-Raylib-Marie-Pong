@@ -14,8 +14,6 @@ vector<vector<Terrain::Tile>> Terrain::terrain;
 Vector2 Terrain::tileSize{ 50,50 };
 Vector2 Terrain::position{ 0,0 };
 short Terrain::maxLayer{ 5 };
-//void Terrain::SaveMap(string filename);
-//void Terrain::LoadMap(string filename);
 
 Terrain::Terrain() {
 }
@@ -23,8 +21,7 @@ Terrain::Terrain() {
 Terrain::~Terrain(){
 }
 
-void Terrain::Update()
-{
+void Terrain::Update(){
 }
 
 vector<Terrain::Tile*> Terrain::GetEveryTilesWithModifier(string m){

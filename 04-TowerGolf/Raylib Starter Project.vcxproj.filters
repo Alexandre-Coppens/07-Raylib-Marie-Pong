@@ -31,12 +31,18 @@
     <Filter Include="Fichiers sources\Game\UI">
       <UniqueIdentifier>{0278e25a-f119-4b7a-b272-643ce3749e56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers de ressources\Game\utils">
+      <UniqueIdentifier>{3473cbb8-e8ac-451b-8c9b-5c88f89c76b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game\utils">
+      <UniqueIdentifier>{3259fd64-d85c-4d2d-ab33-d67098bb0ec2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetsList.cpp">
       <Filter>Fichiers sources\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="Actor.cpp">
       <Filter>Fichiers sources\Engine</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -57,6 +63,21 @@
     <ClCompile Include="UIBackground.cpp">
       <Filter>Fichiers sources\Game\UI</Filter>
     </ClCompile>
+    <ClCompile Include="UITower.h">
+      <Filter>Fichiers de ressources\Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UITower.cpp">
+      <Filter>Fichiers sources\Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UINewTower.cpp">
+      <Filter>Fichiers sources\Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Tower.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="TowerBible.cpp">
+      <Filter>Fichiers sources\Game\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetsList.h">
@@ -65,7 +86,7 @@
     <ClInclude Include="DrawScreen.h">
       <Filter>Fichiers de ressources\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="Actor.h">
       <Filter>Fichiers de ressources\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Terrain.h">
@@ -82,6 +103,15 @@
     </ClInclude>
     <ClInclude Include="UIBackground.h">
       <Filter>Fichiers de ressources\Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UINewTower.h">
+      <Filter>Fichiers de ressources\Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Tower.h">
+      <Filter>Fichiers de ressources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="TowerBible.h">
+      <Filter>Fichiers de ressources\Game\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,14 +4,14 @@
 #include <vector>
 #include <map>
 #include "Raylib.h"
-#include "GameObject.h"
+#include "Actor.h"
 #include "Terrain.h"
 
 using std::string;
 using std::vector;
 using std::map;
 
-class Player : public GameObject {
+class Player : public Actor {
 private:
     Vector2 startPos{};
     Vector2 endPos{};
@@ -25,7 +25,6 @@ public:
 private:
 public:
     Player();
-    Player(Vector2 _pos, Vector2 _size, Color color);
     ~Player();
 
     void Start();

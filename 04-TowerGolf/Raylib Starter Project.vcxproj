@@ -137,21 +137,29 @@
     <ClCompile Include="AssetsList.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="GolfBall.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="Tower.cpp" />
+    <ClCompile Include="TowerBible.cpp" />
     <ClCompile Include="UIBackground.cpp" />
+    <ClCompile Include="UINewTower.cpp" />
+    <ClCompile Include="UITower.cpp" />
+    <ClCompile Include="UITower.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetsList.h" />
     <ClInclude Include="DrawScreen.h" />
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Actor.h" />
     <ClInclude Include="GolfBall.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="Tower.h" />
+    <ClInclude Include="TowerBible.h" />
     <ClInclude Include="UIBackground.h" />
+    <ClInclude Include="UINewTower.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

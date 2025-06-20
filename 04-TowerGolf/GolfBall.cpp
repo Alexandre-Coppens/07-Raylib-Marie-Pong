@@ -8,16 +8,9 @@ using std::ifstream;
 using std::to_string;
 using std::cout;
 
-GolfBall::GolfBall() {
-}
-
-GolfBall::GolfBall(Vector2 _pos, Vector2 _size, Color _color) {
-	sprite = &AssetList::SpriteList["Unknown"];
-	position = _pos;
-	size = _size;
-	color = _color;
-	type = GameObjectType::GolfBall;
-	CreateRect();
+GolfBall::GolfBall(Vector2 _pos, Vector2 _size, Color _color):
+	Actor(_pos, _size, ActorType::GolfBall, &AssetList::SpriteList["Unknown"], _color)
+{
 }
 
 GolfBall::~GolfBall() {
@@ -42,15 +35,16 @@ void GolfBall::Update(Vector2* scroll) {
 	Vector2 next = Vector2Add(Vector2Multiply(path[currentPath][currentTile], Terrain::tileSize), Vector2Multiply(Terrain::tileSize, Vector2{ 0.5f, 0.5f }));
 	position = Vector2MoveTowards(position, next, speed * GetFrameTime());
 	if (Vector2Distance(position, next) < 0.1f) {
-		currentTile++;
+		if (currentTile == path[currentPath].size() - 1) {
+			currentTile = 0;
+			position = startPos;
+		}
+		else currentTile++;
 	}
-	//cout << Vector2Distance(position, next) << "\n";
 }
 
 void GolfBall::Draw(Vector2* scroll) {
-	Rectangle source{0, 0, sprite->width, sprite->height};
-	Rectangle dest{position.x - scroll->x, position.y - scroll->y, size.x, size.y};
-	DrawTexturePro(*sprite, source, dest, Vector2{size.x * 0.5f, size.y * 0.5f}, 0, color);
+	Actor::Draw(scroll);
 }
 
 void GolfBall::CreatePaths(vector<Terrain::Tile*> pathTiles, vector<Vector2> currentPath) {

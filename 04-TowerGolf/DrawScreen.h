@@ -3,7 +3,7 @@
 #include <vector>
 #include "Raylib.h"
 #include "AssetsList.h"
-#include "GameObject.h"
+#include "Actor.h"
 #include "Terrain.h"
 
 using std::vector;
@@ -12,7 +12,7 @@ static void DrawScreen(Vector2* scroll);
 
 //Draw the terrain and the gameObjects on screen
 static void DrawScreen(Vector2* scroll){
-	vector<vector<GameObject*>>* goList = GameObject::GetAllGameObjectsLayered();
+	vector<vector<Actor*>>* goList = Actor::GetAllActorsLayered();
 	vector<vector<Terrain::Tile>>* terrain = &Terrain::terrain;
 
 	short max = fmax(terrain->size(), goList->size());
@@ -37,7 +37,7 @@ static void DrawScreen(Vector2* scroll){
 		}
 
 		if (goList->size() > i) {
-			for (GameObject* go : (*goList)[i]) {
+			for (Actor* go : (*goList)[i]) {
 				if (go->enabled) go->Draw(scroll);
 			}
 		}
