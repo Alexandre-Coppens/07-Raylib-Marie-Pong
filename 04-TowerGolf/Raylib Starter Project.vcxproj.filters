@@ -78,6 +78,12 @@
     <ClCompile Include="TowerBible.cpp">
       <Filter>Fichiers sources\Game\utils</Filter>
     </ClCompile>
+    <ClCompile Include="GolfBible.cpp">
+      <Filter>Fichiers sources\Game\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="GolfWaveSystem.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetsList.h">
@@ -111,6 +117,12 @@
       <Filter>Fichiers de ressources\Game</Filter>
     </ClInclude>
     <ClInclude Include="TowerBible.h">
+      <Filter>Fichiers de ressources\Game\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GolfWaveSystem.h">
+      <Filter>Fichiers de ressources\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GolfBible.h">
       <Filter>Fichiers de ressources\Game\utils</Filter>
     </ClInclude>
   </ItemGroup>

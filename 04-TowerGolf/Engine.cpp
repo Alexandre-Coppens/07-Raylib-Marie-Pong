@@ -7,6 +7,7 @@
 #include "GolfBall.h"
 #include "Player.h"
 #include "UIBackground.h"
+#include "GolfWaveSystem.h"
 
 using std::cout;
 using std::to_string;
@@ -23,9 +24,9 @@ void Engine::Start(){
 	Terrain::LoadMap("TowerPath");
 
 //Create Objects Here
-	Actor::CreateActor("GolfBallTest", 3, new GolfBall(Vector2{ 0, 0 }, Vector2{ 20,20 }, RED));
 	Actor::CreateActor("Player", 0, new Player());
 	Actor::CreateActor("UIBackground", 10, new UIBackground());
+	Actor::CreateActor("GolfWaveSystem", 10, new GolfWaveSystem());
 
 	vector<Actor*> goList = Actor::GetAllActors();
 	for (Actor* go : goList) {

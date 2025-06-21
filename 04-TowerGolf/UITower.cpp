@@ -2,6 +2,7 @@
 #include <string>
 #include "UITower.h"
 #include "UINewTower.h"
+#include "AssetsList.h"
 
 using std::string;
 using std::cout;

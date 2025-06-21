@@ -35,13 +35,14 @@ void Actor::Draw(Vector2* scroll) {
 void Actor::Collided(){
 }
 
-void Actor::CreateActor(const string id, int layer,Actor* actor){
+Actor* Actor::CreateActor(const string id, int layer,Actor* actor){
 	actor->name = id;
 	ActorList[id] = actor;
 	if (ActorsByLayer.size() < layer+1) {
 		ActorsByLayer.resize(layer+1);
 	}
 	ActorsByLayer[layer].push_back(actor);
+	return actor;
 }
 
 Actor* Actor::GetActorWithName(string _name) {

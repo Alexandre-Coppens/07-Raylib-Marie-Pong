@@ -13,10 +13,7 @@ using std::map;
 
 class GolfBall : public Actor {
 private:
-    Vector2 startPos{};
-    Vector2 endPos{};
-    vector<vector<Vector2>> path{};
-    int currentPath{};
+    vector<Vector2> path{};
     int currentTile{1};
     float speed = 50;
 
@@ -31,5 +28,5 @@ public:
     void Update(Vector2* scroll);
     void Draw(Vector2* scroll);
 
-    void CreatePaths(vector<Terrain::Tile*> pathTiles, vector<Vector2> currentPath);
+    const inline void  SetPath(vector<Vector2> _path) { path = _path; }
 };

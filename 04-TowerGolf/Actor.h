@@ -63,7 +63,7 @@ public:
     //Collision Gestion
     virtual void Collided();
 
-    static void CreateActor(const string id, int layer, Actor* actor);
+    static Actor* CreateActor(const string id, int layer, Actor* actor);
 
     static Actor* GetActorWithName(string _name);
     static vector<Actor*> GetAllActors();
