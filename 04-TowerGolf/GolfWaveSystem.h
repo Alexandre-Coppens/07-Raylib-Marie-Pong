@@ -23,7 +23,7 @@ private:
     vector<vector<Vector2>> path{};
 
     bool canSpawnWave{ true };
-    float timer{ 0 };
+    float timer{ 99 };
     int currentSpawnNbr{ 0 };
     int currentPart{ 0 };
     int currentWave{ 0 };

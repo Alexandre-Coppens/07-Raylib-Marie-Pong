@@ -22,7 +22,7 @@ void Projectile::Update(Vector2* scroll){
 
 	for (auto i : hits) {
 		if (GolfBall* ball = dynamic_cast<GolfBall*>(i)) {
-			ball->Destroy();
+			ball->ApplyDamage();
 			Destroy();
 			break;
 		}

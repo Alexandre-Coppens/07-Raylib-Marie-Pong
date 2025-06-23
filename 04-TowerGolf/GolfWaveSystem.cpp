@@ -24,6 +24,13 @@ void GolfWaveSystem::Start() {
 
 void GolfWaveSystem::Update(Vector2* scroll) {
 	if (canSpawnWave) SpawnWave();
+	vector<Actor*> ballsLeft = GetAllActorsWith(ActorType::GolfBall);
+	if (ballsLeft.size() == 0) {
+		canSpawnWave = true;
+		currentPart = 0;
+		if(currentWave != GolfBible::waves.size() - 1)currentWave++;
+		timer = 99;
+	}
 }
 
 void GolfWaveSystem::Draw(Vector2* scroll) {
@@ -59,7 +66,6 @@ void GolfWaveSystem::SpawnWave() {
 		if (timer >= GolfBible::waves[currentWave][currentPart].timeBtwEnemies) {
 			timer = 0;
 			currentSpawnNbr++;
-			ballsLeft++;
 			CreateGolfBall(GolfBible::waves[currentWave][currentPart].golfType);
 		}
 		else {
@@ -70,8 +76,8 @@ void GolfWaveSystem::SpawnWave() {
 		if (timer >= GolfBible::waves[currentWave][currentPart].timeBeforeNextPart) {
 			timer = 0;
 			currentSpawnNbr = 0;
-			currentWave++;
-			canSpawnWave = false;
+			currentPart++;
+			if(currentPart == GolfBible::waves[currentWave].size())canSpawnWave = false;
 		}
 		else {
 			timer += GetFrameTime();
@@ -85,9 +91,10 @@ void GolfWaveSystem::CreateGolfBall(GolfType golfType) {
 	switch (golfType)
 	{
 	case GolfType::White:
-		pGolfBall = static_cast<GolfBall*>(Actor::CreateActor("GolfWhite" + to_string(std::rand()), 3, new GolfBall(startPos, Vector2{ 20,20 }, WHITE)));
+		pGolfBall = static_cast<GolfBall*>(Actor::CreateActor("GolfWhite" + to_string(std::rand()), 3, new GolfBall(startPos, Vector2{ 20,20 }, GolfType::White, WHITE)));
 		break;
 	case GolfType::Red:
+		pGolfBall = static_cast<GolfBall*>(Actor::CreateActor("GolfRed" + to_string(std::rand()), 3, new GolfBall(startPos, Vector2{ 20,20 }, GolfType::Red, WHITE)));
 		break;
 	case GolfType::Metal:
 		break;
@@ -96,7 +103,7 @@ void GolfWaveSystem::CreateGolfBall(GolfType golfType) {
 	case GolfType::Boss:
 		break;
 	}
-	if(pGolfBall != nullptr) pGolfBall->SetPath(path[r]);
+	if(pGolfBall != nullptr) pGolfBall->SetPath(path[r], 1);
 	pGolfBall = NULL;
 	delete pGolfBall;
 }
