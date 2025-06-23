@@ -42,6 +42,7 @@ Actor* Actor::CreateActor(const string id, int layer,Actor* actor){
 		ActorsByLayer.resize(layer+1);
 	}
 	ActorsByLayer[layer].push_back(actor);
+	actor->Start();
 	return actor;
 }
 
@@ -76,12 +77,27 @@ vector<Actor*> Actor::GetAllActorsWith(ActorType type){
     return ret;
 }
 
+vector<Actor*> Actor::GetAllActorsInCollision(Rectangle collider)
+{
+	vector<Actor*> ret{};
+	for (auto const& i : ActorList) {
+		if (i.second->position.x + i.second->size.x >= collider.x && 
+			i.second->position.x <= collider.x + collider.width && 
+			i.second->position.y + i.second->size.y >= collider.y && 
+			i.second->position.y <= collider.y + collider.height) {
+			ret.push_back(const_cast<Actor*>(i.second));
+		}
+	}
+	return ret;
+}
+
 void Actor::DestroyActorList(){
 	ActorList.clear();
 }
 
-void Actor::Clicked() {
-}
+void Actor::MouseHover() {}
+
+void Actor::Clicked() {}
 
 void Actor::Destroy() {
 	needToDestroy = true;

@@ -13,7 +13,11 @@ using std::map;
 
 class Tower : public Actor {
 private:
-    TowerType towerType;
+    TowerType towerType{};
+    TowerStats towerStats{};
+
+    float timer{0};
+
 public:
 
 private:
@@ -23,7 +27,8 @@ public:
 
     void Start();
     void Update(Vector2* scroll);
-    //void Draw(Vector2* scroll);
+    void Draw(Vector2* scroll);
 
+    void Attack();
     void MouseInteract(Vector2* scroll);
 };

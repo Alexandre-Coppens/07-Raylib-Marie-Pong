@@ -59,6 +59,7 @@ public:
 
     //Mouse Gestion
     virtual void Clicked();
+    virtual void MouseHover();
 
     //Collision Gestion
     virtual void Collided();
@@ -69,6 +70,7 @@ public:
     static vector<Actor*> GetAllActors();
     static vector<vector<Actor*>>* GetAllActorsLayered();
     static vector<Actor*> GetAllActorsWith(ActorType type);
+    static vector<Actor*> GetAllActorsInCollision(Rectangle collider);
     
     static void DestroyActorList();
 };

@@ -5,6 +5,8 @@
 class UITower : public Actor {
 private:
     TowerType towerType;
+    bool isHovered;
+
 public:
 
 private:
@@ -16,5 +18,6 @@ public:
     void Update(Vector2* scroll);
     void Draw(Vector2* scroll);
 
+    void MouseHover();
     void Clicked();
 };

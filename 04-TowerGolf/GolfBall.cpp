@@ -2,6 +2,7 @@
 #include <fstream>
 #include "GolfBall.h"
 #include "GolfBible.h"
+#include "Player.h"
 
 using std::ofstream;
 using std::ifstream;
@@ -25,6 +26,7 @@ void GolfBall::Update(Vector2* scroll) {
 	position = Vector2MoveTowards(position, next, speed * GetFrameTime());
 	if (Vector2Distance(position, next) < 0.1f) {
 		if (currentTile == path.size() - 1) {
+			Player::lives--;
 			Destroy();
 		}
 		else currentTile++;

@@ -28,10 +28,6 @@ void Engine::Start(){
 	Actor::CreateActor("UIBackground", 10, new UIBackground());
 	Actor::CreateActor("GolfWaveSystem", 10, new GolfWaveSystem());
 
-	vector<Actor*> goList = Actor::GetAllActors();
-	for (Actor* go : goList) {
-		go->Start();
-	}
 }
 
 void Engine::Update() {

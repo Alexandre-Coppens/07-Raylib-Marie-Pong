@@ -22,6 +22,7 @@ void UINewTower::Update(Vector2* scroll){
 	position = GetMousePosition();
 	CheckCanBePlaced(scroll);
 	if (IsMouseButtonPressed(0)) PlaceTower(scroll);
+	if (IsMouseButtonPressed(1)) Destroy();
 }
 
 void UINewTower::Draw(Vector2* scroll){
