@@ -60,6 +60,7 @@ public:
     //Mouse Gestion
     virtual void Clicked();
     virtual void MouseHover();
+    virtual void MouseHoverUI();
 
     //Collision Gestion
     virtual void Collided();

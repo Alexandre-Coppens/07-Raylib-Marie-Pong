@@ -44,7 +44,7 @@ void UITower::Draw(Vector2* scroll){
 	isHovered = false;
 }
 
-void UITower::MouseHover() {
+void UITower::MouseHoverUI() {
 	isHovered = true;
 }
 

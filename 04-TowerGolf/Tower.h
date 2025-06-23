@@ -20,6 +20,8 @@ private:
 
     float timer{0};
 
+    bool mouseHover;
+
 public:
 
 private:
@@ -38,4 +40,5 @@ public:
     void AttackMoai();
 
     void MouseInteract(Vector2* scroll);
+    void MouseHover();
 };

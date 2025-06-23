@@ -20,6 +20,6 @@ public:
     void Update(Vector2* scroll);
     void Draw(Vector2* scroll);
 
-    void MouseHover();
+    void MouseHoverUI();
     void Clicked();
 };

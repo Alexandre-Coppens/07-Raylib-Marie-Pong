@@ -115,6 +115,8 @@ void Actor::DestroyActorList(){
 
 void Actor::MouseHover() {}
 
+void Actor::MouseHoverUI() {}
+
 void Actor::Clicked() {}
 
 void Actor::Destroy() {

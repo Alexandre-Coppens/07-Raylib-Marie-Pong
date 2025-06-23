@@ -43,7 +43,16 @@ void Tower::Update(Vector2* scroll){
 }
 
 void Tower::Draw(Vector2* scroll) {
+	if (mouseHover) {
+		if (towerType == TowerType::PirateBoat || towerType == TowerType::Moai || towerType == TowerType::Volcano) {
+			color.a = 50;
+			DrawCircleV(Vector2Subtract(position, *scroll), TowerBible::GetTowerStats(towerType).range, color);
+		}
+
+		color.a = 255;
+	}
 	Actor::Draw(scroll);
+	mouseHover = false;
 }
 
 void Tower::Attack() {
@@ -122,7 +131,9 @@ void Tower::AttackMoai() {
 
 
 
-
+void Tower::MouseHover() { 
+	mouseHover = true; 
+}
 
 void Tower::MouseInteract(Vector2* scroll){
 }

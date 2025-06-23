@@ -30,6 +30,9 @@ void Player::Update(Vector2* scroll) {
 	vector<Actor*> actors = GetAllActors();
 	for (auto i : actors) {
 		if (GetMouseX() >= i->position.x - i->size.x * 0.5f && GetMouseX() <= i->position.x + i->size.x * 0.5f && GetMouseY() >= i->position.y - i->size.y * 0.5f && GetMouseY() <= i->position.y + i->size.y * 0.5f) {
+			i->MouseHoverUI();
+		}
+		if (GetMouseX() >= i->position.x - i->size.x * 0.5f -scroll->x && GetMouseX() <= i->position.x + i->size.x * 0.5f - scroll->x && GetMouseY() >= i->position.y - i->size.y * 0.5f - scroll->y && GetMouseY() <= i->position.y + i->size.y * 0.5f - scroll->y) {
 			i->MouseHover();
 		}
 	}
