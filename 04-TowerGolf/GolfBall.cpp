@@ -3,6 +3,7 @@
 #include "GolfBall.h"
 #include "GolfBible.h"
 #include "Player.h"
+#include "Terrain.h"
 
 using std::ofstream;
 using std::ifstream;
@@ -37,3 +38,14 @@ void GolfBall::Draw(Vector2* scroll) {
 	Actor::Draw(scroll);
 }
 
+void GolfBall::ApplyDamage() {
+	Player::money++;
+	PlaySound(AssetList::soundList["GolfBall_Hit2"]);
+	Destroy();
+}
+
+Vector2 GolfBall::GetDistance()
+{
+	Vector2 next = Vector2Add(Vector2Multiply(path[currentTile], Terrain::tileSize), Vector2Multiply(Terrain::tileSize, Vector2{ 0.5f, 0.5f }));
+	return Vector2{ (float)path.size() - currentTile, Vector2Distance(position, next) };
+}

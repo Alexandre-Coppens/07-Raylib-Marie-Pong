@@ -70,7 +70,8 @@ public:
     static vector<Actor*> GetAllActors();
     static vector<vector<Actor*>>* GetAllActorsLayered();
     static vector<Actor*> GetAllActorsWith(ActorType type);
-    static vector<Actor*> GetAllActorsInCollision(Rectangle collider);
-    
+    static vector<Actor*> GetAllActorsInCollisionRect(Rectangle collider);
+    static vector<Actor*> GetAllActorsInCollisionCirc(Vector2 origin, float radius);
+
     static void DestroyActorList();
 };

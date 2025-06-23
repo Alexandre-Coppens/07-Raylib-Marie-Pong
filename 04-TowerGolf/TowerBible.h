@@ -31,7 +31,9 @@ public:
 	TowerBible();
 	~TowerBible();
 
-	static Texture2D* GetTowerSkin(const TowerType towerType);
 	static int GetTowerPrice(const TowerType towerType);
+	static string GetTowerName(const TowerType towerType);
+	static string GetTowerPlacement(const TowerType towerType);
+    static Texture2D* GetTowerSkin(const TowerType towerType);
 	static TowerStats GetTowerStats(const TowerType towerType);
 };

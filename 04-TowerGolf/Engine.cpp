@@ -19,8 +19,8 @@ Engine::Engine() {
 
 void Engine::Start(){
 	assets = AssetList::GetInstance();
-	terrain.tileSize = Vector2{ 50,50 };
-	scroll = { -GetScreenWidth() * 0.5f ,-GetScreenHeight() * 0.5f };
+	terrain.tileSize = Vector2{ 45,45 };
+	scroll = { -GetScreenWidth() * 0.5f - 30 ,-GetScreenHeight() * 0.5f - 40};
 	Terrain::LoadMap("TowerPath");
 
 //Create Objects Here

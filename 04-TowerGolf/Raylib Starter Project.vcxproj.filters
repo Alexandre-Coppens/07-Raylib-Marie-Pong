@@ -84,6 +84,9 @@
     <ClCompile Include="GolfWaveSystem.cpp">
       <Filter>Fichiers sources\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetsList.h">
@@ -124,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="GolfBible.h">
       <Filter>Fichiers de ressources\Game\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Fichiers de ressources\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

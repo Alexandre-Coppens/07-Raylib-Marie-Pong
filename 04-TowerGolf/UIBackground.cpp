@@ -1,5 +1,6 @@
 #include "UIBackground.h"
 #include "UITower.h"
+#include "TowerBible.h"
 
 UIBackground::UIBackground():
 	Actor(Vector2{ 0, 0 }, Vector2{ 100, (float)GetScreenHeight() }, ActorType::UI, & AssetList::SpriteList["Button"], GRAY)

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Raylib.h"
 #include "Actor.h"
 #include "TowerBible.h"

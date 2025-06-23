@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <vector>
 #include <map>
@@ -17,6 +19,7 @@ public:
 private:
     void PlaceTower(Vector2* scroll);
     void CheckCanBePlaced(Vector2* scroll);
+    short CheckTile(Vector2* scroll);
 
 public:
     UINewTower(TowerType _towerType);

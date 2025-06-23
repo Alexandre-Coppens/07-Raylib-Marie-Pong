@@ -77,7 +77,8 @@ vector<Actor*> Actor::GetAllActorsWith(ActorType type){
     return ret;
 }
 
-vector<Actor*> Actor::GetAllActorsInCollision(Rectangle collider)
+//Get every actors in Rectangle Collision
+vector<Actor*> Actor::GetAllActorsInCollisionRect(Rectangle collider)
 {
 	vector<Actor*> ret{};
 	for (auto const& i : ActorList) {
@@ -85,6 +86,23 @@ vector<Actor*> Actor::GetAllActorsInCollision(Rectangle collider)
 			i.second->position.x <= collider.x + collider.width && 
 			i.second->position.y + i.second->size.y >= collider.y && 
 			i.second->position.y <= collider.y + collider.height) {
+			ret.push_back(const_cast<Actor*>(i.second));
+		}
+	}
+	return ret;
+}
+
+//Get every actors in Circle Collision
+vector<Actor*> Actor::GetAllActorsInCollisionCirc(Vector2 origin, float radius)
+{
+	vector<Actor*> ret{};
+	for (auto const& i : ActorList) {
+		Vector2 pos = i.second->position;
+		Vector2 size = i.second->size;
+		if (Vector2Distance(origin, pos) <= radius ||
+			Vector2Distance(origin, Vector2 {pos.x + size.x, pos.y}) <= radius ||
+			Vector2Distance(origin, Vector2{ pos.x, pos.y + size.y }) <= radius ||
+			Vector2Distance(origin, Vector2{ pos.x + size.x, pos.y + size.y }) <= radius) {
 			ret.push_back(const_cast<Actor*>(i.second));
 		}
 	}

@@ -16,6 +16,7 @@ int Player::lives;
 Player::Player() {
 	sprite = &AssetList::SpriteList["Button"];
 	currentTile = 1;
+	money = 100;
 	lives = 100;
 }
 

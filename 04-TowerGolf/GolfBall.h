@@ -28,5 +28,9 @@ public:
     void Update(Vector2* scroll);
     void Draw(Vector2* scroll);
 
+    void ApplyDamage();
+    Vector2  GetDistance();
+
     const inline void  SetPath(vector<Vector2> _path) { path = _path; }
+    
 };

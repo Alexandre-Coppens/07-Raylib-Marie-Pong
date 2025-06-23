@@ -16,6 +16,8 @@ private:
     TowerType towerType{};
     TowerStats towerStats{};
 
+    uint8_t upgrade{ 0 };
+
     float timer{0};
 
 public:
@@ -30,5 +32,8 @@ public:
     void Draw(Vector2* scroll);
 
     void Attack();
+    void AttackWindmill();
+    void AttackBoat();
+
     void MouseInteract(Vector2* scroll);
 };

@@ -11,7 +11,7 @@ using std::cout;
 
 map<int, string> Terrain::dictionary;
 vector<vector<Terrain::Tile>> Terrain::terrain;
-Vector2 Terrain::tileSize{ 50,50 };
+Vector2 Terrain::tileSize{ 45,45 };
 Vector2 Terrain::position{ 0,0 };
 short Terrain::maxLayer{ 5 };
 
