@@ -16,6 +16,7 @@ private:
     vector<Vector2> path{};
     int currentTile{1};
     float speed = 50;
+    bool slowed{ 0 };
 
 public:
 
@@ -31,6 +32,7 @@ public:
     void ApplyDamage();
     Vector2  GetDistance();
 
+    const inline void SetSlowed() { slowed = true; }
     const inline void  SetPath(vector<Vector2> _path) { path = _path; }
     
 };

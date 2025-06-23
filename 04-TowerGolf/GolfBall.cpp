@@ -24,7 +24,7 @@ void GolfBall::Start() {
 
 void GolfBall::Update(Vector2* scroll) {
 	Vector2 next = Vector2Add(Vector2Multiply(path[currentTile], Terrain::tileSize), Vector2Multiply(Terrain::tileSize, Vector2{ 0.5f, 0.5f }));
-	position = Vector2MoveTowards(position, next, speed * GetFrameTime());
+	position = Vector2MoveTowards(position, next, speed * GetFrameTime() * (slowed?0.33f:1));
 	if (Vector2Distance(position, next) < 0.1f) {
 		if (currentTile == path.size() - 1) {
 			Player::lives--;
@@ -32,6 +32,7 @@ void GolfBall::Update(Vector2* scroll) {
 		}
 		else currentTile++;
 	}
+	slowed = false;
 }
 
 void GolfBall::Draw(Vector2* scroll) {

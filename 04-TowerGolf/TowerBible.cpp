@@ -18,11 +18,11 @@ int TowerBible::GetTowerPrice(const TowerType towerType)
 	case TowerType::PirateBoat:
 		return 40;
 	case TowerType::Dinosaur:
-		return 30;
+		return 40;
 	case TowerType::Volcano:
-		return 30;
+		return 60;
 	case TowerType::Moai:
-		return 30;
+		return 90;
 	}
 	return 30;
 }
@@ -85,15 +85,15 @@ TowerStats TowerBible::GetTowerStats(const TowerType towerType)
 	switch (towerType)
 	{
 	case TowerType::Windmill:
-		return TowerStats{ 1, false, 0, 20, Vector2{0, 20}, false };
+		return TowerStats{ 1, false, 0, 20, Vector2{-10, 20}, false };
 	case TowerType::PirateBoat:
 		return TowerStats{ 1, true, 150, 0, Vector2{0, 0}, false };
 	case TowerType::Dinosaur:
-		return TowerStats{ 1.5f, false, 0, 20, Vector2{0, 50}, true };
+		return TowerStats{ 1.5f, false, 0, 40, Vector2{-20, 50}, true };
 	case TowerType::Volcano:
-		return TowerStats{ 0.25f, false, 25, 50, Vector2{0, 0}, true };
+		return TowerStats{ 0.001f, true, 50, 0, Vector2{0, 0}, true };
 	case TowerType::Moai:
-		return TowerStats{ 0.25f, true, 75, 0, Vector2{0, 0}, true };
+		return TowerStats{ 2, true, 75, 0, Vector2{0, 0}, true };
 	}
 	return TowerStats{ 0.25f, false, 0, 20, Vector2{0, 20}, true };
 }

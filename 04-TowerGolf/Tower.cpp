@@ -59,10 +59,10 @@ void Tower::Attack() {
 		AttackWindmill();
 		break;
 	case TowerType::Volcano:
-		AttackWindmill();
+		AttackVolcano();
 		break;
 	case TowerType::Moai:
-		AttackWindmill();
+		AttackMoai();
 		break;
 	}
 	return;
@@ -100,11 +100,25 @@ void Tower::AttackBoat() {
 	if(closest != nullptr)	Actor::CreateActor("Projectile" + to_string(std::rand()), 0, new Projectile(position, Vector2{ 15,15 }, closest));
 }
 
+void Tower::AttackVolcano() {
+	vector<Actor*> hits = GetAllActorsInCollisionCirc(position, towerStats.range);
 
+	for (auto i : hits) {
+		if (GolfBall* ball = dynamic_cast<GolfBall*>(i)) {
+			ball->SetSlowed();
+		}
+	}
+}
 
+void Tower::AttackMoai() {
+	vector<Actor*> hits = GetAllActorsInCollisionCirc(position, towerStats.range);
 
-
-
+	for (auto i : hits) {
+		if (GolfBall* ball = dynamic_cast<GolfBall*>(i)) {
+			ball->ApplyDamage();
+		}
+	}
+}
 
 
 

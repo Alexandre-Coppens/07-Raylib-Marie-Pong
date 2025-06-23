@@ -34,6 +34,8 @@ public:
     void Attack();
     void AttackWindmill();
     void AttackBoat();
+    void AttackVolcano();
+    void AttackMoai();
 
     void MouseInteract(Vector2* scroll);
 };
